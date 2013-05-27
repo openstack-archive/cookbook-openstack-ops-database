@@ -15,22 +15,40 @@ Chef 11 with Ruby 1.9.x required.
 The following cookbooks are dependencies:
 
 * database
+* mysql
 
 # Resources/Providers #
 
 None
 
-# Recipes #
-
-## default ##
-
-- configures the database selected by attributes
-
-# Attributes #
-
 # Templates #
 
 None
+
+# Recipes #
+
+## client ##
+
+- database client configuration, selected by attributes
+
+## server ##
+
+- database server configuration, selected by attributes
+
+## mysql-client ##
+
+- calls mysql::ruby and mysql::client and installs 'mysql_python_packages'
+
+## mysql-server ##
+
+- configures the mysql server for OpenStack
+
+# Attributes #
+
+* `openstack['database']['server_role']` - which role should other nodes search on to find the database service, defaults to 'os-ops-database'
+
+* `openstack['database']['service']` - which service to use, defaults to 'mysql'
+* `openstack['database']['platform']['mysql_python_packages']` - platform-specific mysql python packages to install
 
 License and Author
 ==================
@@ -44,6 +62,7 @@ License and Author
 | **Author**           |  William Kelly (<william.kelly@rackspace.com>)     |
 | **Author**           |  Darren Birkett (<darren.birkett@rackspace.co.uk>) |
 | **Author**           |  Evan Callicoat (<evan.callicoat@rackspace.com>)   |
+| **Author**           |  Matt Thompson (<matt.thompson@rackspace.co.uk>)   |
 | **Author**           |  Matt Ray (<matt@opscode.com>)                     |
 |                      |                                                    |
 | **Copyright**        |  Copyright (c) 2012-2013, Rackspace US, Inc.       |

@@ -1,3 +1,4 @@
-## 2013.1.0
+## 7.0.0
 
-* initial release
+* Initial release intended for Grizzly-based OpenStack releases,
+  for use with Stackforge upstream repositories.
