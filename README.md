@@ -1,6 +1,6 @@
 # Description #
 
-This cookbook provides shared database configuration for the OpenStack **Grizzly** reference deployment provided by Chef for OpenStack. The http://github.com/mattray/chef-openstack-repo contains documentation for using this cookbook in the context of a full OpenStack deployment. It currently supports MySQL and will soon support PostgreSQL.
+This cookbook provides a reference example of database configuration for the OpenStack **Grizzly** reference deployment provided by Chef for OpenStack. It currently supports MySQL and will soon support PostgreSQL.
 
 # Requirements #
 
@@ -16,6 +16,11 @@ The following cookbooks are dependencies:
 
 * database
 * mysql
+* postgresql
+
+# Usage #
+
+The usage of this cookbook is optional, you may choose to set up your own databases without using this cookbook. If you choose to do so, you will need to provide all of the attributes listed under the [Attributes](#attributes) and create the schema specified by the `openstack-*-db` recipes.
 
 # Resources/Providers #
 
