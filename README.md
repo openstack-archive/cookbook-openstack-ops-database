@@ -55,6 +55,19 @@ None
 * `openstack['database']['service']` - which service to use, defaults to 'mysql'
 * `openstack['database']['platform']['mysql_python_packages']` - platform-specific mysql python packages to install
 
+Testing
+=====
+
+This cookbook uses [bundler](http://gembundler.com/), [berkshelf](http://berkshelf.com/), and [strainer](https://github.com/customink/strainer) to isolate dependencies and run tests.
+
+Tests are defined in Strainerfile.
+
+To run tests:
+
+    $ bundle install # install gem dependencies
+    $ bundle exec berks install # install cookbook dependencies
+    $ bundle exec strainer test # run tests
+
 License and Author
 ==================
 
@@ -69,6 +82,7 @@ License and Author
 | **Author**           |  Evan Callicoat (<evan.callicoat@rackspace.com>)   |
 | **Author**           |  Matt Thompson (<matt.thompson@rackspace.co.uk>)   |
 | **Author**           |  Matt Ray (<matt@opscode.com>)                     |
+| **Author**           |  Sean Gallagher (<sean.gallagher@.att.com>)        |
 |                      |                                                    |
 | **Copyright**        |  Copyright (c) 2012-2013, Rackspace US, Inc.       |
 | **Copyright**        |  Copyright (c) 2012-2013, Opscode, Inc.            |
