@@ -11,3 +11,9 @@ require "chefspec"
   :version   => "12.04",
   :log_level => ::LOG_LEVEL
 }
+
+def ops_database_stubs
+  ::Chef::Recipe.any_instance.stub(:address_for).
+    with("lo").
+    and_return "127.0.0.1"
+end

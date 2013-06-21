@@ -10,10 +10,11 @@ recipe "server", "Installs and configures server packages for the database used 
 recipe "mysql-client", "Installs MySQL client packages."
 recipe "mysql-server", "Installs and configured MySQL server packages."
 
-%w{ ubuntu redhat centos }.each do |os|
+%w{ fedora ubuntu redhat centos }.each do |os|
   supports os
 end
 
 depends "database", ">= 1.4"
 depends "mysql", ">= 3.0.0"
+depends "openstack-common", "~> 0.3.0"
 depends "postgresql", ">= 3.0.0"

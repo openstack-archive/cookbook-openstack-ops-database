@@ -1,30 +1,97 @@
-require_relative 'spec_helper'
+require_relative "spec_helper"
 
-describe 'openstack-ops-database::mysql-server' do
-  describe 'ubuntu' do
+describe "openstack-ops-database::mysql-server" do
+  before { ops_database_stubs }
+  describe "ubuntu" do
     before do
-      @chef_run = ::ChefSpec::ChefRunner.new(::UBUNTU_OPTS) do |node|
-        node.set['lsb'] = {'codename' => 'precise'}
-        node.set['mysql'] = {
-          'server_debian_password' => 'foo',
-          'server_root_password' => 'bar',
-          'server_repl_password' => 'baz'
-        }
-        node.set['openstack']= {'database' => {
-            'service' => 'mysql'
-          }
+      @chef_run = ::ChefSpec::ChefRunner.new(::UBUNTU_OPTS) do |n|
+        n.set["mysql"] = {
+          "server_debian_password" => "server-debian-password",
+          "server_root_password" => "server-root-password",
+          "server_repl_password" => "server-repl-password"
         }
       end
       @chef_run.converge "openstack-ops-database::mysql-server"
     end
 
-    it "mysql-client recipe basic test" do
-      expect(@chef_run).to include_recipe "openstack-ops-database::mysql-client"
-      expect(@chef_run).to include_recipe "mysql::ruby"
-      expect(@chef_run).to include_recipe "mysql::client"
-      expect(@chef_run).to include_recipe "mysql::server"
-      expect(@chef_run).to install_package "python-mysqldb"
+    it "overrides default mysql attributes" do
+      expect(@chef_run.node["mysql"]["bind_address"]).to eql "127.0.0.1"
+      expect(@chef_run.node['mysql']['tunable']['innodb_thread_concurrency']).to eql "0"
+      expect(@chef_run.node['mysql']['tunable']['innodb_commit_concurrency']).to eql "0"
+      expect(@chef_run.node['mysql']['tunable']['innodb_read_io_threads']).to eql "4"
+      expect(@chef_run.node['mysql']['tunable']['innodb_flush_log_at_trx_commit']).to eql "2"
     end
 
+    it "includes mysql recipes" do
+      expect(@chef_run).to include_recipe "openstack-ops-database::mysql-client"
+      expect(@chef_run).to include_recipe "mysql::server"
+    end
+
+    describe "lwrps" do
+      before do
+        @connection = {
+          :host => "localhost",
+          :username => "root",
+          :password => "server-root-password"
+        }
+      end
+
+      it "removes insecure default localhost mysql users" do
+        resource = @chef_run.find_resource(
+          "mysql_database_user",
+          "drop empty localhost user"
+        ).to_hash
+
+        expect(resource).to include(
+          :username => "",
+          :host => "localhost",
+          :connection => @connection,
+          :action => [:drop]
+        )
+      end
+
+      it "removes insecure default hostname mysql users" do
+        resource = @chef_run.find_resource(
+          "mysql_database_user",
+          "drop empty hostname user"
+        ).to_hash
+
+        expect(resource).to include(
+          :username => "",
+          :host => "Fauxhai",
+          :connection => @connection,
+          :action => [:drop]
+        )
+      end
+
+      it "drops the test database" do
+        resource = @chef_run.find_resource(
+          "mysql_database",
+          "test"
+        ).to_hash
+
+        expect(resource).to include(
+          :connection => @connection,
+          :action => [:drop]
+        )
+      end
+
+      it "flushes privileges" do
+        resource = @chef_run.find_resource(
+          "mysql_database",
+          "FLUSH privileges"
+        ).to_hash
+
+        expect(resource).to include(
+          :connection => @connection,
+          :sql => "FLUSH privileges",
+          :action => [:nothing]
+        )
+      end
+
+      it "flush privileges subscribes to 'mysql_database[test]', :query" do
+        pending "How to test subscribes"
+      end
+    end
   end
 end

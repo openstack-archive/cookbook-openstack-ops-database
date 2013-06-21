@@ -16,6 +16,7 @@ The following cookbooks are dependencies:
 
 * database
 * mysql
+* openstack-common
 * postgresql
 
 # Usage #
@@ -50,10 +51,10 @@ None
 
 # Attributes #
 
-* `openstack['database']['server_role']` - which role should other nodes search on to find the database service, defaults to 'os-ops-database'
-
-* `openstack['database']['service']` - which service to use, defaults to 'mysql'
-* `openstack['database']['platform']['mysql_python_packages']` - platform-specific mysql python packages to install
+* `openstack["database"]["server_role"]` - which role should other nodes search on to find the database service, defaults to 'os-ops-database'
+* `openstack["database"]["service_type"]` - which service to use, defaults to 'mysql'
+* `openstack["database"]["bind_interface"]` - bind to interfaces IPv4 address
+* `openstack["database"]["platform"]["mysql_python_packages"]` - platform-specific mysql python packages to install
 
 Testing
 =====
@@ -83,9 +84,11 @@ License and Author
 | **Author**           |  Matt Thompson (<matt.thompson@rackspace.co.uk>)   |
 | **Author**           |  Matt Ray (<matt@opscode.com>)                     |
 | **Author**           |  Sean Gallagher (<sean.gallagher@.att.com>)        |
+| **Author**           |  John Dewey (<jdewey@att.com>)                     |
 |                      |                                                    |
 | **Copyright**        |  Copyright (c) 2012-2013, Rackspace US, Inc.       |
 | **Copyright**        |  Copyright (c) 2012-2013, Opscode, Inc.            |
+| **Copyright**        |  Copyright (c) 2013, AT&T Services, Inc.           |
 
 
 Licensed under the Apache License, Version 2.0 (the "License");
