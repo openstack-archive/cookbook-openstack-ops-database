@@ -18,8 +18,9 @@
 #
 
 default["openstack"]["database"]["server_role"] = "os-ops-database"
-default["openstack"]["database"]["service_type"] = "mysql"
 default["openstack"]["database"]["bind_interface"] = "lo"
+# TODO(retr0h): Delete when these attributes are merged into openstack-common
+default["openstack"]["database"]["service_type"] = "mysql"
 
 # Platform defaults
 case platform
