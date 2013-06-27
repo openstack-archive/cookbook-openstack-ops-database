@@ -21,7 +21,11 @@ The following cookbooks are dependencies:
 
 # Usage #
 
-The usage of this cookbook is optional, you may choose to set up your own databases without using this cookbook. If you choose to do so, you will need to provide all of the attributes listed under the [Attributes](#attributes) and create the schema specified by the `openstack-*-db` recipes.
+The usage of this cookbook is optional, you may choose to set up your own databases without using this cookbook. If you choose to do so, you will need to do the following:
+
+* create the schema specified by the `openstack-db` recipe.
+* create and upload encrypted data bags into your chef environment, as
+  specified by `#db_password` in the `openstack-db` recipe.
 
 # Resources/Providers #
 
@@ -49,10 +53,12 @@ None
 
 - configures the mysql server for OpenStack
 
+## openstack-db ##
+
+- creates necessary tables, users, and grants for OpenStack
+
 # Attributes #
 
-* `openstack["database"]["server_role"]` - which role should other nodes search on to find the database service, defaults to 'os-ops-database'
-* `openstack["database"]["service_type"]` - which service to use, defaults to 'mysql'
 * `openstack["database"]["bind_interface"]` - bind to interfaces IPv4 address
 * `openstack["database"]["platform"]["mysql_python_packages"]` - platform-specific mysql python packages to install
 
