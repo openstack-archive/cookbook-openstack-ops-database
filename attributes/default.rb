@@ -17,15 +17,15 @@
 # limitations under the License.
 #
 
-default["openstack"]["database"]["server_role"] = "os-ops-database"
-default["openstack"]["database"]["bind_interface"] = "lo"
+default["openstack"]["db"]["server_role"] = "os-ops-database"
+default["openstack"]["db"]["bind_interface"] = "lo"
 # TODO(retr0h): Delete when these attributes are merged into openstack-common
-default["openstack"]["database"]["service_type"] = "mysql"
+default["openstack"]["db"]["service_type"] = "mysql"
 
 # Platform defaults
 case platform
 when "fedora", "redhat", "centos" # :pragma-foodcritic: ~FC024 - won"t fix this
-  default["openstack"]["database"]["platform"]["mysql_python_packages"] = [ "MySQL-python" ]
+  default["openstack"]["db"]["platform"]["mysql_python_packages"] = [ "MySQL-python" ]
 when "ubuntu"
-  default["openstack"]["database"]["platform"]["mysql_python_packages"] = [ "python-mysqldb" ]
+  default["openstack"]["db"]["platform"]["mysql_python_packages"] = [ "python-mysqldb" ]
 end

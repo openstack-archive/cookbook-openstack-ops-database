@@ -21,6 +21,6 @@
 include_recipe "mysql::ruby"
 include_recipe "mysql::client"
 
-node["openstack"]["database"]["platform"]["mysql_python_packages"].each do |pkg|
+node["openstack"]["db"]["platform"]["mysql_python_packages"].each do |pkg|
   package pkg
 end

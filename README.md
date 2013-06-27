@@ -59,8 +59,8 @@ None
 
 # Attributes #
 
-* `openstack["database"]["bind_interface"]` - bind to interfaces IPv4 address
-* `openstack["database"]["platform"]["mysql_python_packages"]` - platform-specific mysql python packages to install
+* `openstack["db"]["bind_interface"]` - bind to interfaces IPv4 address
+* `openstack["db"]["platform"]["mysql_python_packages"]` - platform-specific mysql python packages to install
 
 Testing
 =====

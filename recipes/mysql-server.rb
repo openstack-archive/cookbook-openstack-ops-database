@@ -19,7 +19,7 @@
 # limitations under the License.
 #
 
-listen_address = address_for node["openstack"]["database"]["bind_interface"]
+listen_address = address_for node["openstack"]["db"]["bind_interface"]
 
 node.override["mysql"]["bind_address"] = listen_address
 node.override["mysql"]["tunable"]["innodb_thread_concurrency"] = "0"

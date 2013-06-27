@@ -18,4 +18,4 @@
 # limitations under the License.
 #
 
-include_recipe "openstack-ops-database::#{node["openstack"]["database"]["service_type"]}-server"
+include_recipe "openstack-ops-database::#{node["openstack"]["db"]["service_type"]}-server"
