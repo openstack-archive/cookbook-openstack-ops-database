@@ -17,10 +17,7 @@
 # limitations under the License.
 #
 
-default["openstack"]["db"]["server_role"] = "os-ops-database"
 default["openstack"]["db"]["bind_interface"] = "lo"
-# TODO(retr0h): Delete when these attributes are merged into openstack-common
-default["openstack"]["db"]["service_type"] = "mysql"
 
 # Platform defaults
 case platform

@@ -1,5 +1,5 @@
 {
-  "sha": "04be0802cd18a9a6df36ec6bcf0129dcc601cfab",
+  "sha": "188e234e0dfbc9fcab11cc824dc7ca0e00ff0587",
   "sources": {
     "openstack-ops-database": {
       "path": "."
@@ -12,12 +12,12 @@
     "openstack-common": {
       "locked_version": "0.3.0",
       "git": "git://github.com/stackforge/cookbook-openstack-common.git",
-      "ref": "0c771cfab3147489e7dffcf9b9b067f2aa9d0f8b"
+      "ref": "ae80d36e8f8d5705e01bb6c14238eccb5450a229"
     },
     "openstack-compute": {
       "locked_version": "7.0.0",
       "git": "git://github.com/stackforge/cookbook-openstack-compute.git",
-      "ref": "89201c6ff17e77b3fd4ccfb8ac98ecd8cdfc3921"
+      "ref": "8cb588c74e423e8112f61195a028942585ea3b87"
     },
     "openstack-dashboard": {
       "locked_version": "7.0.0",
@@ -27,7 +27,7 @@
     "openstack-identity": {
       "locked_version": "7.0.0",
       "git": "git://github.com/stackforge/cookbook-openstack-identity.git",
-      "ref": "e07ccdc5cdf6221967f2cffc748dabe1caf46f45"
+      "ref": "1b161e2d537a6d7a2417a50f0bee3f3ed6e94f01"
     },
     "openstack-image": {
       "locked_version": "7.0.0",
@@ -37,7 +37,7 @@
     "openstack-network": {
       "locked_version": "7.0.0",
       "git": "git://github.com/stackforge/cookbook-openstack-network.git",
-      "ref": "335b045e68eff2beea4fc73eeebb6937652e7ac7"
+      "ref": "617e4597df1efffbc00c38225023b68a904b1ab4"
     },
     "database": {
       "locked_version": "1.4.0"
