@@ -19,6 +19,10 @@
 # limitations under the License.
 #
 
+class ::Chef::Recipe
+  include ::Openstack
+end
+
 listen_address = address_for node["openstack"]["db"]["bind_interface"]
 
 node.override["mysql"]["bind_address"] = listen_address
