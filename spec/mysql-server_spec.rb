@@ -38,29 +38,14 @@ describe "openstack-ops-database::mysql-server" do
 
       it "removes insecure default localhost mysql users" do
         resource = @chef_run.find_resource(
-          "mysql_database_user",
+          "mysql_database",
           "drop empty localhost user"
         ).to_hash
 
         expect(resource).to include(
-          :username => "",
-          :host => "localhost",
+          :sql => "DELETE FROM mysql.user WHERE User = '' OR Password = ''",
           :connection => @connection,
-          :action => [:drop]
-        )
-      end
-
-      it "removes insecure default hostname mysql users" do
-        resource = @chef_run.find_resource(
-          "mysql_database_user",
-          "drop empty hostname user"
-        ).to_hash
-
-        expect(resource).to include(
-          :username => "",
-          :host => "Fauxhai",
-          :connection => @connection,
-          :action => [:drop]
+          :action => [:query]
         )
       end
 
@@ -79,18 +64,14 @@ describe "openstack-ops-database::mysql-server" do
       it "flushes privileges" do
         resource = @chef_run.find_resource(
           "mysql_database",
-          "FLUSH privileges"
+          "FLUSH PRIVILEGES"
         ).to_hash
 
         expect(resource).to include(
           :connection => @connection,
-          :sql => "FLUSH privileges",
-          :action => [:nothing]
+          :sql => "FLUSH PRIVILEGES",
+          :action => [:query]
         )
-      end
-
-      it "flush privileges subscribes to 'mysql_database[test]', :query" do
-        pending "How to test subscribes"
       end
     end
   end

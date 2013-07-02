@@ -40,18 +40,21 @@ mysql_connection_info = {
   :password => node["mysql"]["server_root_password"]
 }
 
-mysql_database_user "drop empty localhost user" do
-  username ""
-  host "localhost"
+mysql_database "FLUSH PRIVILEGES" do
   connection mysql_connection_info
-  action :drop
+  sql "FLUSH PRIVILEGES"
+  action :query
 end
 
-mysql_database_user "drop empty hostname user" do
-  username ""
-  host node["hostname"]
+# Unfortunately, this is needed to get around a MySQL bug
+# that repeatedly shows its face when running this in Vagabond
+# containers:
+#
+# http://bugs.mysql.com/bug.php?id=69644
+mysql_database "drop empty localhost user" do
+  sql "DELETE FROM mysql.user WHERE User = '' OR Password = ''"
   connection mysql_connection_info
-  action :drop
+  action :query
 end
 
 mysql_database "test" do
@@ -59,9 +62,8 @@ mysql_database "test" do
   action :drop
 end
 
-mysql_database "FLUSH privileges" do
+mysql_database "FLUSH PRIVILEGES" do
   connection mysql_connection_info
-  sql "FLUSH privileges"
-  action :nothing
-  subscribes :query, "mysql_database[test]"
+  sql "FLUSH PRIVILEGES"
+  action :query
 end
