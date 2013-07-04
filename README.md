@@ -54,6 +54,14 @@ None
 
 - configures the mysql server for OpenStack
 
+## postgresql-client ##
+
+- calls postgresql::ruby and postgresql::client and installs 'postgresql_python_packages'
+
+## postgresql-server ##
+
+- configures the PostgreSQL server for OpenStack
+
 ## openstack-db ##
 
 - creates necessary tables, users, and grants for OpenStack

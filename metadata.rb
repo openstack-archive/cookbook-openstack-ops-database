@@ -8,7 +8,9 @@ version           "7.0.0"
 recipe "client", "Installs client packages for the database used by the deployment."
 recipe "server", "Installs and configures server packages for the database used by the deployment."
 recipe "mysql-client", "Installs MySQL client packages."
-recipe "mysql-server", "Installs and configured MySQL server packages."
+recipe "mysql-server", "Installs and configures MySQL server packages."
+recipe "postgresql-client", "Installs PostgreSQL client packages."
+recipe "postgresql-server", "Installs and configures PostgreSQL server packages."
 recipe "openstack-db", "Creates necessary tables, users, and grants for OpenStack."
 
 %w{ fedora ubuntu redhat centos suse }.each do |os|
