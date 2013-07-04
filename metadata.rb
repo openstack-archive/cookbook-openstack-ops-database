@@ -11,7 +11,7 @@ recipe "mysql-client", "Installs MySQL client packages."
 recipe "mysql-server", "Installs and configured MySQL server packages."
 recipe "openstack-db", "Creates necessary tables, users, and grants for OpenStack."
 
-%w{ fedora ubuntu redhat centos }.each do |os|
+%w{ fedora ubuntu redhat centos suse }.each do |os|
   supports os
 end
 

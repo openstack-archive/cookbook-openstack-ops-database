@@ -9,6 +9,7 @@ Chef 11 with Ruby 1.9.x required.
 # Platforms #
 
 * Ubuntu-12.04
+* openSUSE 12.3, SLES 11 SP2
 
 # Cookbooks #
 
@@ -91,10 +92,12 @@ License and Author
 | **Author**           |  Matt Ray (<matt@opscode.com>)                     |
 | **Author**           |  Sean Gallagher (<sean.gallagher@.att.com>)        |
 | **Author**           |  John Dewey (<jdewey@att.com>)                     |
+| **Author**           |  Ionut Artarisi (<iartarisi@suse.cz>)              |
 |                      |                                                    |
 | **Copyright**        |  Copyright (c) 2012-2013, Rackspace US, Inc.       |
 | **Copyright**        |  Copyright (c) 2012-2013, Opscode, Inc.            |
 | **Copyright**        |  Copyright (c) 2013, AT&T Services, Inc.           |
+| **Copyright**        |  Copyright (c) 2013, SUSE Linux GmbH               |
 
 
 Licensed under the Apache License, Version 2.0 (the "License");
