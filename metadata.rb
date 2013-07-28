@@ -20,7 +20,7 @@ end
 depends "database", ">= 1.4"
 depends "mysql", ">= 3.0.0"
 depends "openstack-block-storage"
-depends "openstack-common", "~> 0.3.0"
+depends "openstack-common", "~> 0.4.0"
 depends "openstack-compute"
 depends "openstack-dashboard"
 depends "openstack-identity"
