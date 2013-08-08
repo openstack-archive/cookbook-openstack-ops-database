@@ -14,3 +14,5 @@ cookbook "openstack-image",
   git: "git://github.com/stackforge/cookbook-openstack-image.git"
 cookbook "openstack-network",
   git: "git://github.com/stackforge/cookbook-openstack-network.git"
+cookbook "openstack-metering",
+  git: "git://github.com/stackforge/cookbook-openstack-metering.git"

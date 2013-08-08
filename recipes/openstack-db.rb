@@ -47,7 +47,7 @@ db_create_with_user(
 
 db_create_with_user(
   "metering",
-  node["openstack"]["compute"]["ceilometer"]["db"]["username"],
+  node["openstack"]["metering"]["db"]["username"],
   db_password("ceilometer")
 )
 
