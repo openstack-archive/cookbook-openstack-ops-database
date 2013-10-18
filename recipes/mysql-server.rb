@@ -30,6 +30,7 @@ node.override["mysql"]["tunable"]["innodb_thread_concurrency"] = "0"
 node.override["mysql"]["tunable"]["innodb_commit_concurrency"] = "0"
 node.override["mysql"]["tunable"]["innodb_read_io_threads"] = "4"
 node.override["mysql"]["tunable"]["innodb_flush_log_at_trx_commit"] = "2"
+node.override["mysql"]["tunable"]["skip-name-resolve"] = true
 
 include_recipe "openstack-ops-database::mysql-client"
 include_recipe "mysql::server"

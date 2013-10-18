@@ -20,6 +20,7 @@ describe "openstack-ops-database::mysql-server" do
       expect(@chef_run.node['mysql']['tunable']['innodb_commit_concurrency']).to eql "0"
       expect(@chef_run.node['mysql']['tunable']['innodb_read_io_threads']).to eql "4"
       expect(@chef_run.node['mysql']['tunable']['innodb_flush_log_at_trx_commit']).to eql "2"
+      expect(@chef_run.node["mysql"]["tunable"]["skip-name-resolve"]).to eql true
     end
 
     it "includes mysql recipes" do
