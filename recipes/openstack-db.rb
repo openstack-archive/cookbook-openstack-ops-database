@@ -54,7 +54,7 @@ db_create_with_user(
 db_create_with_user(
   "network",
   node["openstack"]["network"]["db"]["username"],
-  db_password("quantum")
+  db_password("neutron")
 )
 
 db_create_with_user(

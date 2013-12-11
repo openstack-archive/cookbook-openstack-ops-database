@@ -45,7 +45,7 @@ describe "openstack-ops-database::openstack-db" do
 
   it "creates network database and user" do
     ::Chef::Recipe.any_instance.should_receive(:db_create_with_user).
-      with "network", "quantum", "test-pass"
+      with "network", "neutron", "test-pass"
 
     @chef_run.converge "openstack-ops-database::openstack-db"
   end

@@ -34,9 +34,9 @@
       "ref": "46c86ac9f929613d3b1046a7be587329dbf22845"
     },
     "openstack-network": {
-      "locked_version": "7.1.1",
+      "locked_version": "8.0.0",
       "git": "git://github.com/stackforge/cookbook-openstack-network.git",
-      "ref": "91c3df304a1ff883c636215e1b58b8b5aafcf56c"
+      "ref": "6cda0639c35d1a94ff23d703fd71d3f134a5be86"
     },
     "openstack-metering": {
       "locked_version": "7.1.1",
