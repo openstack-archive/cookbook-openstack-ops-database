@@ -5,7 +5,7 @@ describe "openstack-ops-database::openstack-db" do
     ::Chef::Recipe.any_instance.stub(:db_create_with_user)
     ::Chef::Recipe.any_instance.stub(:db_password).
       and_return("test-pass")
-    @chef_run = ::ChefSpec::ChefRunner.new ::UBUNTU_OPTS
+    @chef_run = ::ChefSpec::Runner.new ::UBUNTU_OPTS
   end
 
   it "creates nova database and user" do

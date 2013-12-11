@@ -4,7 +4,7 @@ describe "openstack-ops-database::postgresql-client" do
   before { ops_database_stubs }
   describe "opensuse" do
     before do
-      @chef_run = ::ChefSpec::ChefRunner.new ::OPENSUSE_OPTS
+      @chef_run = ::ChefSpec::Runner.new ::OPENSUSE_OPTS
       @chef_run.converge "openstack-ops-database::mysql-client"
     end
 

@@ -4,7 +4,7 @@ describe "openstack-ops-database::postgresql-server" do
   before { ops_database_stubs }
   describe "ubuntu" do
     before do
-      @chef_run = ::ChefSpec::ChefRunner.new ::UBUNTU_OPTS
+      @chef_run = ::ChefSpec::Runner.new ::UBUNTU_OPTS
       # The postgresql cookbook will raise an "uninitialized constant
       # Chef::Application" error without this attribute when running
       # the tests

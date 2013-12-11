@@ -18,6 +18,7 @@ require "chefspec"
 }
 
 def ops_database_stubs
+  stub_command("\"/usr/bin/mysql\" -u root -e 'show databases;'")
   ::Chef::Recipe.any_instance.stub(:address_for).
     with("lo").
     and_return "127.0.0.1"

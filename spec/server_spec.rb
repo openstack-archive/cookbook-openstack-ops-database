@@ -5,7 +5,7 @@ describe "openstack-ops-database::server" do
   describe "ubuntu" do
 
     it "uses mysql database server recipe by default" do
-      chef_run = ::ChefSpec::ChefRunner.new(::UBUNTU_OPTS) do |n|
+      chef_run = ::ChefSpec::Runner.new(::UBUNTU_OPTS) do |n|
         n.set["mysql"] = {
           "server_debian_password" => "server-debian-password",
           "server_root_password" => "server-root-password",
@@ -18,7 +18,7 @@ describe "openstack-ops-database::server" do
     end
 
     it "uses postgresql database server recipe when configured" do
-      chef_run = ::ChefSpec::ChefRunner.new ::UBUNTU_OPTS do |n|
+      chef_run = ::ChefSpec::Runner.new ::UBUNTU_OPTS do |n|
         n.set["openstack"]["db"]["service_type"] = "postgresql"
         # The postgresql cookbook will raise an "uninitialized constant
         # Chef::Application" error without this attribute when running

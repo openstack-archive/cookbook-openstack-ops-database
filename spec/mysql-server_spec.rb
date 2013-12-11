@@ -4,7 +4,7 @@ describe "openstack-ops-database::mysql-server" do
   before { ops_database_stubs }
   describe "ubuntu" do
     before do
-      @chef_run = ::ChefSpec::ChefRunner.new(::UBUNTU_OPTS) do |n|
+      @chef_run = ::ChefSpec::Runner.new(::UBUNTU_OPTS) do |n|
         n.set["mysql"] = {
           "server_debian_password" => "server-debian-password",
           "server_root_password" => "server-root-password",
