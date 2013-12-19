@@ -27,4 +27,5 @@ depends 'openstack-identity', '~> 8.0'
 depends 'openstack-image', '~> 8.0'
 depends 'openstack-metering', '~> 8.0'
 depends 'openstack-network', '~> 8.0'
+depends "openstack-orchestration", "~> 8.0"
 depends 'postgresql', '>= 3.0.0'

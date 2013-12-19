@@ -62,3 +62,9 @@ db_create_with_user(
   node["openstack"]["block-storage"]["db"]["username"],
   db_password("cinder")
 )
+
+db_create_with_user(
+  "orchestration",
+  node["openstack"]["orchestration"]["db"]["username"],
+  db_password("heat")
+)

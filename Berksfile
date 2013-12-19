@@ -16,3 +16,5 @@ cookbook "openstack-network",
   git: "git://github.com/stackforge/cookbook-openstack-network.git"
 cookbook "openstack-metering",
   git: "git://github.com/stackforge/cookbook-openstack-metering.git"
+cookbook "openstack-orchestration",
+  git: "git://github.com/stackforge/cookbook-openstack-orchestration.git"

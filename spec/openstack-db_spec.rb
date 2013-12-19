@@ -56,4 +56,11 @@ describe "openstack-ops-database::openstack-db" do
 
     @chef_run.converge "openstack-ops-database::openstack-db"
   end
+
+  it "creates orchestration database and user" do
+    ::Chef::Recipe.any_instance.should_receive(:db_create_with_user).
+      with "orchestration", "heat", "test-pass"
+
+    @chef_run.converge "openstack-ops-database::openstack-db"
+  end
 end
