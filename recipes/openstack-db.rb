@@ -24,47 +24,47 @@ end
 db_create_with_user(
   "compute",
   node["openstack"]["compute"]["db"]["username"],
-  db_password("nova")
+  get_password("db", "nova")
 )
 
 db_create_with_user(
   "dashboard",
   node["openstack"]["dashboard"]["db"]["username"],
-  db_password("horizon")
+  get_password("db", "horizon")
 )
 
 db_create_with_user(
   "identity",
   node["openstack"]["identity"]["db"]["username"],
-  db_password("keystone")
+  get_password("db", "keystone")
 )
 
 db_create_with_user(
   "image",
   node["openstack"]["image"]["db"]["username"],
-  db_password("glance")
+  get_password("db", "glance")
 )
 
 db_create_with_user(
   "metering",
   node["openstack"]["metering"]["db"]["username"],
-  db_password("ceilometer")
+  get_password("db", "ceilometer")
 )
 
 db_create_with_user(
   "network",
   node["openstack"]["network"]["db"]["username"],
-  db_password("neutron")
+  get_password("db", "neutron")
 )
 
 db_create_with_user(
   "volume",
   node["openstack"]["block-storage"]["db"]["username"],
-  db_password("cinder")
+  get_password("db", "cinder")
 )
 
 db_create_with_user(
   "orchestration",
   node["openstack"]["orchestration"]["db"]["username"],
-  db_password("heat")
+  get_password("heat")
 )

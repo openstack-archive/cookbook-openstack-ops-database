@@ -26,7 +26,7 @@ The usage of this cookbook is optional, you may choose to set up your own databa
 
 * create the schema specified by the `openstack-db` recipe.
 * create and upload encrypted data bags into your chef environment, as
-  specified by `#db_password` in the `openstack-db` recipe.
+  specified by `#get_password` in the `openstack-db` recipe.
 
 # Resources/Providers #
 

@@ -3,7 +3,7 @@ require_relative "spec_helper"
 describe "openstack-ops-database::openstack-db" do
   before do
     ::Chef::Recipe.any_instance.stub(:db_create_with_user)
-    ::Chef::Recipe.any_instance.stub(:db_password).
+    ::Chef::Recipe.any_instance.stub(:get_password).
       and_return("test-pass")
     @chef_run = ::ChefSpec::Runner.new ::UBUNTU_OPTS
   end
