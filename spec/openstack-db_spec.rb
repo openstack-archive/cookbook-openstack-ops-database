@@ -13,7 +13,7 @@ describe 'openstack-ops-database::openstack-db' do
 
   it 'creates nova database and user' do
     ::Chef::Recipe.any_instance.should_receive(:db_create_with_user)
-      .with 'dashboard', 'dash', 'test-pass'
+      .with 'compute', 'nova', 'test-pass'
 
     @chef_run.converge 'openstack-ops-database::openstack-db'
   end
@@ -55,7 +55,7 @@ describe 'openstack-ops-database::openstack-db' do
 
   it 'creates volume database and user' do
     ::Chef::Recipe.any_instance.should_receive(:db_create_with_user)
-      .with 'volume', 'cinder', 'test-pass'
+      .with 'block-storage', 'cinder', 'test-pass'
 
     @chef_run.converge 'openstack-ops-database::openstack-db'
   end
