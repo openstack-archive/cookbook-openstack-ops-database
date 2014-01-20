@@ -66,5 +66,5 @@ db_create_with_user(
 db_create_with_user(
   "orchestration",
   node["openstack"]["orchestration"]["db"]["username"],
-  get_password("heat")
+  get_password("db", "heat")
 )
