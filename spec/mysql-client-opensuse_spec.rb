@@ -1,15 +1,17 @@
-require_relative "spec_helper"
+# encoding: UTF-8
 
-describe "openstack-ops-database::postgresql-client" do
+require_relative 'spec_helper'
+
+describe 'openstack-ops-database::postgresql-client' do
   before { ops_database_stubs }
-  describe "opensuse" do
+  describe 'opensuse' do
     before do
       @chef_run = ::ChefSpec::Runner.new ::OPENSUSE_OPTS
-      @chef_run.converge "openstack-ops-database::mysql-client"
+      @chef_run.converge 'openstack-ops-database::mysql-client'
     end
 
-    it "installs mysql packages" do
-      expect(@chef_run).to install_package "python-mysql"
+    it 'installs mysql packages' do
+      expect(@chef_run).to install_package 'python-mysql'
     end
   end
 end

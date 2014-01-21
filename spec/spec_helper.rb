@@ -1,26 +1,28 @@
-require "chefspec"
-require "chefspec/berkshelf"
+# encoding: UTF-8
+
+require 'chefspec'
+require 'chefspec/berkshelf'
 
 ::LOG_LEVEL = :fatal
 ::OPENSUSE_OPTS = {
-  :platform  => "opensuse",
-  :version   => "12.3",
-  :log_level => ::LOG_LEVEL
+  platform: 'opensuse',
+  version: '12.3',
+  log_level: ::LOG_LEVEL
 }
 ::REDHAT_OPTS = {
-  :platform  => "redhat",
-  :version => "6.3",
-  :log_level => ::LOG_LEVEL
+  platform: 'redhat',
+  version: '6.3',
+  log_level: ::LOG_LEVEL
 }
 ::UBUNTU_OPTS = {
-  :platform  => "ubuntu",
-  :version   => "12.04",
-  :log_level => ::LOG_LEVEL
+  platform: 'ubuntu',
+  version: '12.04',
+  log_level: ::LOG_LEVEL
 }
 
 def ops_database_stubs
   stub_command("\"/usr/bin/mysql\" -u root -e 'show databases;'")
-  ::Chef::Recipe.any_instance.stub(:address_for).
-    with("lo").
-    and_return "127.0.0.1"
+  ::Chef::Recipe.any_instance.stub(:address_for)
+    .with('lo')
+    .and_return '127.0.0.1'
 end
