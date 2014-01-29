@@ -1,3 +1,4 @@
+# encoding: UTF-8
 #
 # Cookbook Name:: openstack-ops-database
 # Recipe:: mysql-client
@@ -18,9 +19,9 @@
 # limitations under the License.
 #
 
-include_recipe "mysql::ruby"
-include_recipe "mysql::client"
+include_recipe 'mysql::ruby'
+include_recipe 'mysql::client'
 
-node["openstack"]["db"]["platform"]["mysql_python_packages"].each do |pkg|
+node['openstack']['db']['platform']['mysql_python_packages'].each do |pkg|
   package pkg
 end
