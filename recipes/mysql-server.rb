@@ -36,6 +36,13 @@ node.override['mysql']['tunable']['skip-name-resolve'] = true
 include_recipe 'openstack-ops-database::mysql-client'
 include_recipe 'mysql::server'
 
+# NOTE:(mancdaz) This is a temporary workaround for this upstream bug in the
+# mysql cookbook. It can be removed once the upstream issue is resolved:
+#
+# https://tickets.opscode.com/browse/COOK-4161
+r = resources('template[/etc/mysql/my.cnf]')
+r.notifies_immediately(:restart, 'service[mysql]')
+
 mysql_connection_info = {
   host: 'localhost',
   username: 'root',

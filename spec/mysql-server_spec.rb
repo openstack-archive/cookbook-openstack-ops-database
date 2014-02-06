@@ -30,6 +30,11 @@ describe 'openstack-ops-database::mysql-server' do
       expect(@chef_run).to include_recipe 'mysql::server'
     end
 
+    it 'modifies my.cnf template to notify mysql restart' do
+      file = @chef_run.template '/etc/mysql/my.cnf'
+      expect(file).to notify('service[mysql]').to(:restart)
+    end
+
     describe 'lwrps' do
       before do
         @connection = {
