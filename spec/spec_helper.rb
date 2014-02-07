@@ -11,7 +11,7 @@ require 'chefspec/berkshelf'
 }
 ::REDHAT_OPTS = {
   platform: 'redhat',
-  version: '6.3',
+  version: '6.5',
   log_level: ::LOG_LEVEL
 }
 ::UBUNTU_OPTS = {
@@ -21,7 +21,11 @@ require 'chefspec/berkshelf'
 }
 
 def ops_database_stubs
+  # for redhat
+  stub_command("/usr/bin/mysql -u root -e 'show databases;'")
+  # for debian
   stub_command("\"/usr/bin/mysql\" -u root -e 'show databases;'")
+
   ::Chef::Recipe.any_instance.stub(:address_for)
     .with('lo')
     .and_return '127.0.0.1'

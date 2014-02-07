@@ -40,7 +40,14 @@ include_recipe 'mysql::server'
 # mysql cookbook. It can be removed once the upstream issue is resolved:
 #
 # https://tickets.opscode.com/browse/COOK-4161
-r = resources('template[/etc/mysql/my.cnf]')
+case node['platform_family']
+when 'debian'
+  mycnf_template = '/etc/mysql/my.cnf'
+when 'rhel'
+  mycnf_template = 'final-my.cnf'
+end
+
+r = resources("template[#{mycnf_template}]")
 r.notifies_immediately(:restart, 'service[mysql]')
 
 mysql_connection_info = {
