@@ -4,9 +4,9 @@ require_relative 'spec_helper'
 
 describe 'openstack-ops-database::postgresql-client' do
   before { ops_database_stubs }
-  describe 'opensuse' do
+  describe 'suse' do
     before do
-      @chef_run = ::ChefSpec::Runner.new ::OPENSUSE_OPTS
+      @chef_run = ::ChefSpec::Runner.new ::SUSE_OPTS
       @chef_run.converge 'openstack-ops-database::mysql-client'
     end
 
