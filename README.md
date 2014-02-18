@@ -69,8 +69,17 @@ None
 
 # Attributes #
 
-* `openstack["db"]["bind_interface"]` - bind to interfaces IPv4 address
 * `openstack["db"]["platform"]["mysql_python_packages"]` - platform-specific mysql python packages to install
+
+The following attributes are defined in attributes/database.rb of the common cookbook, but are documented here due to their relevance:
+
+* `openstack["endpoints"]["db"]["host"]` - The IP address to bind the database service to
+* `openstack["endpoints"]["db"]["scheme"]` - Unused at this time
+* `openstack["endpoints"]["db"]["port"]` - The port to bind the database service to
+* `openstack["endpoints"]["db"]["path"]` - Unused at this time
+* `openstack["endpoints"]["db"]["bind_interface"]` - The interface name to bind the database service to
+
+If the value of the "bind_interface" attribute is non-nil, then the database service will be bound to the first IP address on that interface.  If the value of the "bind_interface" attribute is nil, then the database service will be bound to the IP address specified in the host attribute.
 
 Testing
 =====

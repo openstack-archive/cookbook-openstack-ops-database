@@ -18,8 +18,6 @@
 # limitations under the License.
 #
 
-default['openstack']['db']['bind_interface'] = 'lo'
-
 # Platform defaults
 case platform
 when 'fedora', 'redhat', 'centos' # :pragma-foodcritic: ~FC024 - won't fix this
