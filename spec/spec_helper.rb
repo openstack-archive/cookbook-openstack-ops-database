@@ -30,3 +30,9 @@ def ops_database_stubs
     .with('lo')
     .and_return '127.0.0.1'
 end
+
+# README(galstrom21): This will remove any coverage warnings from
+#   dependent cookbooks
+ChefSpec::Coverage.filters << '*/openstack-ops-database'
+
+at_exit { ChefSpec::Coverage.report! }
