@@ -1,6 +1,6 @@
 # Description #
 
-This cookbook provides a reference example of database configuration for the OpenStack **Grizzly** reference deployment provided by Chef for OpenStack. It currently supports MySQL and will soon support PostgreSQL.
+This cookbook provides a reference example of database configuration for the OpenStack **Havana** reference deployment provided by Chef for OpenStack. It currently supports MySQL and PostgreSQL.
 
 # Requirements #
 
@@ -9,15 +9,16 @@ Chef 11 with Ruby 1.9.x required.
 # Platforms #
 
 * Ubuntu-12.04
-* openSUSE 12.3, SLES 11 SP2
+* SLES 11 SP3
+* RHEL/CentOS 6.5
 
 # Cookbooks #
 
 The following cookbooks are dependencies:
 
 * database
-* mysql
 * openstack-common
+* mysql
 * postgresql
 
 # Usage #
