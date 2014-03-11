@@ -3,21 +3,24 @@
 require_relative 'spec_helper'
 
 describe 'openstack-ops-database::postgresql-server' do
-  before { ops_database_stubs }
   describe 'ubuntu' do
-    before do
-      @chef_run = ::ChefSpec::Runner.new ::UBUNTU_OPTS
+    include_context 'database-stubs'
+
+    let(:runner) { ChefSpec::Runner.new(UBUNTU_OPTS) }
+    let(:node) { runner.node }
+    let(:chef_run) do
       # The postgresql cookbook will raise an 'uninitialized constant
       # Chef::Application' error without this attribute when running
       # the tests
-      @chef_run.node.set['postgresql']['password']['postgres'] = String.new
-      @chef_run.converge 'openstack-ops-database::postgresql-server'
+      node.set_unless['postgresql']['password']['postgres'] = String.new
+
+      runner.converge(described_recipe)
     end
 
     it 'includes postgresql recipes' do
-      expect(@chef_run).to include_recipe(
+      expect(chef_run).to include_recipe(
         'openstack-ops-database::postgresql-client')
-      expect(@chef_run).to include_recipe 'postgresql::server'
+      expect(chef_run).to include_recipe('postgresql::server')
     end
   end
 end
