@@ -50,10 +50,16 @@ end
 r = resources("template[#{mycnf_template}]")
 r.notifies_immediately(:restart, 'service[mysql]')
 
+if node['openstack']['db']['root_user_use_databag']
+  super_password = get_password 'user', node['openstack']['db']['root_user_key']
+else
+  super_password = node['mysql']['server_root_password']
+end
+
 mysql_connection_info = {
   host: 'localhost',
   username: 'root',
-  password: node['mysql']['server_root_password']
+  password: super_password
 }
 
 mysql_database 'FLUSH PRIVILEGES' do
