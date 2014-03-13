@@ -39,9 +39,9 @@ describe 'openstack-ops-database::openstack-db' do
     @chef_run.converge 'openstack-ops-database::openstack-db'
   end
 
-  it 'creates metering database and user' do
+  it 'creates telemetry database and user' do
     ::Chef::Recipe.any_instance.should_receive(:db_create_with_user)
-      .with 'metering', 'ceilometer', 'test-pass'
+      .with 'telemetry', 'ceilometer', 'test-pass'
 
     @chef_run.converge 'openstack-ops-database::openstack-db'
   end

@@ -47,8 +47,8 @@ db_create_with_user(
 )
 
 db_create_with_user(
-  'metering',
-  node['openstack']['db']['metering']['username'],
+  'telemetry',
+  node['openstack']['db']['telemetry']['username'],
   get_password('db', 'ceilometer')
 )
 
