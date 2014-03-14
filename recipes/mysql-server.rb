@@ -24,9 +24,9 @@ class ::Chef::Recipe # rubocop:disable Documentation
   include ::Openstack
 end
 
-listen_address = address_for node['openstack']['db']['bind_interface']
+db_endpoint = endpoint 'db'
 
-node.override['mysql']['bind_address'] = listen_address
+node.override['mysql']['bind_address'] = db_endpoint.host
 node.override['mysql']['tunable']['innodb_thread_concurrency'] = '0'
 node.override['mysql']['tunable']['innodb_commit_concurrency'] = '0'
 node.override['mysql']['tunable']['innodb_read_io_threads'] = '4'
