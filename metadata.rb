@@ -18,6 +18,6 @@ recipe 'openstack-db', 'Creates necessary tables, users, and grants for OpenStac
 end
 
 depends 'database', '>= 1.4'
-depends 'mysql', '>= 4.0.20'
+depends 'mysql', '>= 4.1.1'
 depends 'postgresql', '>= 3.0.0'
 depends 'openstack-common', '~> 8.0'
