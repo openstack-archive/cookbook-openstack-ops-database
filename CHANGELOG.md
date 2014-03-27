@@ -2,6 +2,9 @@ openstack-ops-database Cookbook CHANGELG
 ===================================
 This file is used to list changes made in each version of the openstack-ops-database cookbook.
 
+## 9.0.0
+* Upgrade to Icehouse
+
 ## 8.1.0
 * Rename openstack-metering to openstack-telemetry
 
