@@ -1,7 +1,8 @@
 # encoding: UTF-8
-
 require 'chefspec'
 require 'chefspec/berkshelf'
+
+ChefSpec::Coverage.start! { add_filter 'openstack-ops-database' }
 
 ::LOG_LEVEL = :fatal
 ::SUSE_OPTS = {
@@ -32,9 +33,3 @@ shared_context 'database-stubs' do
       .and_return('127.0.0.1')
   end
 end
-
-# README(galstrom21): This will remove any coverage warnings from
-#   dependent cookbooks
-ChefSpec::Coverage.filters << '*/openstack-ops-database'
-
-at_exit { ChefSpec::Coverage.report! }
