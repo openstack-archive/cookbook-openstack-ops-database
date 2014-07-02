@@ -18,6 +18,7 @@ recipe 'openstack-db', 'Creates necessary tables, users, and grants for OpenStac
 end
 
 depends 'mysql', '~> 4.1'
+depends 'galera', '~> 0.4.1'
 depends 'postgresql', '~> 3.3'
 depends 'database', '~> 2.0'
 depends 'openstack-common', '~> 9.0'
