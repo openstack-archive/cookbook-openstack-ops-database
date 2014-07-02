@@ -5,6 +5,7 @@
 #
 # Copyright 2013, Opscode, Inc.
 # Copyright 2013, AT&T Services, Inc.
+# Copyright 2014, SUSE Linux, GmbH
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,6 +23,6 @@
 include_recipe 'mysql::ruby'
 include_recipe 'mysql::client'
 
-node['openstack']['db']['platform']['mysql_python_packages'].each do |pkg|
+node['openstack']['db']['python_packages']['mysql'].each do |pkg|
   package pkg
 end

@@ -5,7 +5,7 @@
 #
 # Copyright 2013, Opscode, Inc.
 # Copyright 2013, AT&T Services, Inc.
-# Copyright 2013, SUSE Linux GmbH
+# Copyright 2013-2014, SUSE Linux GmbH
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,6 +23,6 @@
 include_recipe 'postgresql::ruby'
 include_recipe 'postgresql::client'
 
-node['openstack']['db']['platform']['postgresql_python_packages'].each do |pkg|
+node['openstack']['db']['python_packages']['postgresql'].each do |pkg|
   package pkg
 end

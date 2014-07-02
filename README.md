@@ -49,7 +49,7 @@ None
 
 ## mysql-client ##
 
-- calls mysql::ruby and mysql::client and installs 'mysql_python_packages'
+- calls mysql::ruby and mysql::client and installs the mysql client python packages
 
 ## mysql-server ##
 
@@ -57,7 +57,7 @@ None
 
 ## postgresql-client ##
 
-- calls postgresql::ruby and postgresql::client and installs 'postgresql_python_packages'
+- calls postgresql::ruby and postgresql::client and installs the postgresql client python packages
 
 ## postgresql-server ##
 
@@ -68,8 +68,6 @@ None
 - creates necessary tables, users, and grants for OpenStack
 
 # Attributes #
-
-* `openstack["db"]["platform"]["mysql_python_packages"]` - platform-specific mysql python packages to install
 
 The following attributes are defined in attributes/database.rb of the common cookbook, but are documented here due to their relevance:
 
@@ -117,7 +115,7 @@ License and Author
 | **Copyright**        |  Copyright (c) 2012-2013, Rackspace US, Inc.       |
 | **Copyright**        |  Copyright (c) 2012-2013, Opscode, Inc.            |
 | **Copyright**        |  Copyright (c) 2013, AT&T Services, Inc.           |
-| **Copyright**        |  Copyright (c) 2013, SUSE Linux GmbH               |
+| **Copyright**        |  Copyright (c) 2013-2014, SUSE Linux GmbH          |
 
 
 Licensed under the Apache License, Version 2.0 (the "License");

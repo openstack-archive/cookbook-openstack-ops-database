@@ -17,16 +17,3 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
-# Platform defaults
-case platform_family
-when 'fedora', 'rhel' # :pragma-foodcritic: ~FC024 - won't fix this
-  default['openstack']['db']['platform']['mysql_python_packages'] = ['MySQL-python']
-  default['openstack']['db']['platform']['postgresql_python_packages'] = ['python-psycopg2']
-when 'suse'
-  default['openstack']['db']['platform']['mysql_python_packages'] = ['python-mysql']
-  default['openstack']['db']['platform']['postgresql_python_packages'] = ['python-psycopg2']
-when 'debian'
-  default['openstack']['db']['platform']['mysql_python_packages'] = ['python-mysqldb']
-  default['openstack']['db']['platform']['postgresql_python_packages'] = ['python-psycopg2']
-end
