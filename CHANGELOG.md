@@ -5,6 +5,7 @@ This file is used to list changes made in each version of the openstack-ops-data
 ## 9.1.0
 * python_packages database client attributes have been migrated to
 the -common cookbook
+* bump berkshelf to 2.0.18 to allow Supermarket support
 
 ## 9.0.1
 * Fix metadata for database
