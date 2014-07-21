@@ -1,0 +1,14 @@
+<%= node['openstack']['db']['custom_template_banner'] %>
+[mysqld]
+default-storage-engine = <%= node['mysql']['tunable']['default-storage-engine'] %>
+bind-address = <%= node['mysql']['bind_address'] %>
+innodb_thread_concurrency= <%= node['mysql']['tunable']['innodb_thread_concurrency'] %>
+innodb_commit_concurrency = <%= node['mysql']['tunable']['innodb_commit_concurrency'] %>
+<% if node["mysql"]["version"].to_f >= 5.5 %>
+innodb_read_io_threads = <%= node['mysql']['tunable']['innodb_read_io_threads'] %>
+<% end %>
+innodb_flush_log_at_trx_commit = <%= node['mysql']['tunable']['innodb_flush_log_at_trx_commit'] %>
+<% if node['mysql']['tunable']['skip-name-resolve'] %>
+skip-name-resolve
+<% end %>
+character-set-server = <%= node['mysql']['tunable']['character-set-server'] %>

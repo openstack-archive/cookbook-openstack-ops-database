@@ -22,38 +22,40 @@
 
 class ::Chef::Recipe # rubocop:disable Documentation
   include ::Openstack
+  include ::Opscode::Mysql::Helpers
 end
 
 db_endpoint = endpoint 'db'
 
+if node['openstack']['db']['root_user_use_databag']
+  super_password = get_password 'user', node['openstack']['db']['root_user_key']
+  node.set_unless['mysql']['server_root_password'] = super_password
+else
+  super_password = node['mysql']['server_root_password']
+end
+
+node.set['mysql']['version'] = default_version_for(
+                                 node['platform'],
+                                 node['platform_family'],
+                                 node['platform_version']
+                               )
+node.override['mysql']['tunable']['default-storage-engine'] = 'InnoDB'
 node.override['mysql']['bind_address'] = db_endpoint.host
 node.override['mysql']['tunable']['innodb_thread_concurrency'] = '0'
 node.override['mysql']['tunable']['innodb_commit_concurrency'] = '0'
 node.override['mysql']['tunable']['innodb_read_io_threads'] = '4'
 node.override['mysql']['tunable']['innodb_flush_log_at_trx_commit'] = '2'
 node.override['mysql']['tunable']['skip-name-resolve'] = true
+node.override['mysql']['tunable']['character-set-server'] = 'utf8'
 
 include_recipe 'openstack-ops-database::mysql-client'
 include_recipe 'mysql::server'
 
-# NOTE:(mancdaz) This is a temporary workaround for this upstream bug in the
-# mysql cookbook. It can be removed once the upstream issue is resolved:
-#
-# https://tickets.opscode.com/browse/COOK-4161
-case node['platform_family']
-when 'debian'
-  mycnf_template = '/etc/mysql/my.cnf'
-when 'rhel'
-  mycnf_template = 'final-my.cnf'
-end
-
-r = resources("template[#{mycnf_template}]")
-r.notifies_immediately(:restart, 'service[mysql]')
-
-if node['openstack']['db']['root_user_use_databag']
-  super_password = get_password 'user', node['openstack']['db']['root_user_key']
-else
-  super_password = node['mysql']['server_root_password']
+template '/etc/mysql/conf.d/openstack.cnf' do
+  owner 'mysql'
+  group 'mysql'
+  source 'openstack.cnf.erb'
+  notifies :restart, 'mysql_service[default]'
 end
 
 mysql_connection_info = {

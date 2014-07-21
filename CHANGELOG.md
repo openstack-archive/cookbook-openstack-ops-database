@@ -2,6 +2,9 @@ openstack-ops-database Cookbook CHANGELG
 ===================================
 This file is used to list changes made in each version of the openstack-ops-database cookbook.
 
+## 9.2.0
+* Update database and mysql dependency
+
 ## 9.1.0
 * python_packages database client attributes have been migrated to
 the -common cookbook
