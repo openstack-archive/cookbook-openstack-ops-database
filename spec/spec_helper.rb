@@ -28,7 +28,7 @@ shared_context 'database-stubs' do
     # for debian
     stub_command("\"/usr/bin/mysql\" -u root -e 'show databases;'")
 
-    ::Chef::Recipe.any_instance.stub(:address_for)
+    allow_any_instance_of(Chef::Recipe).to receive(:address_for)
       .with('lo')
       .and_return('127.0.0.1')
   end
