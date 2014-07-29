@@ -1,6 +1,6 @@
 # Description #
 
-This cookbook provides a reference example of database configuration for the OpenStack **Icehouse** reference deployment provided by Chef for OpenStack. It currently supports MySQL and PostgreSQL.
+This cookbook provides a reference example of database configuration for the OpenStack deployment provided by Chef for OpenStack. It currently supports MySQL and PostgreSQL.
 
 # Requirements #
 

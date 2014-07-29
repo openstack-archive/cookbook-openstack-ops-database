@@ -2,6 +2,9 @@ openstack-ops-database Cookbook CHANGELG
 ===================================
 This file is used to list changes made in each version of the openstack-ops-database cookbook.
 
+## 10.0.0
+* Upgrading to Juno
+
 ## 9.2.0
 * Update database and mysql dependency
 
