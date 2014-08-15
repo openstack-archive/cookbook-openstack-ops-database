@@ -4,6 +4,7 @@ This file is used to list changes made in each version of the openstack-ops-data
 
 ## 10.0.0
 * Upgrading to Juno
+* Upgrading berkshelf from 2.0.18 to 3.1.5
 
 ## 9.2.0
 * Update database and mysql dependency
