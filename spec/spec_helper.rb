@@ -34,5 +34,8 @@ shared_context 'database-stubs' do
     allow_any_instance_of(Chef::Recipe).to receive(:get_password)
       .with('db', anything)
       .and_return('test-pass')
+    allow_any_instance_of(Chef::Recipe).to receive(:get_password)
+      .with('user', 'mysqlroot')
+      .and_return('abc123')
   end
 end

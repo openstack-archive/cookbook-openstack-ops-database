@@ -76,6 +76,12 @@ The following attributes are defined in attributes/database.rb of the common coo
 * `openstack["endpoints"]["db"]["port"]` - The port to bind the database service to
 * `openstack["endpoints"]["db"]["path"]` - Unused at this time
 * `openstack["endpoints"]["db"]["bind_interface"]` - The interface name to bind the database service to
+* `openstack["db"]["root_user_use_databag"]` - Whether or not to retrieve the root-user password from a data bag; note that if this is set
+  to true, the mysql server_root_password attribute value will be ignored and will not reflect the password value, unless the attribute
+  value and the password retrieved from the data bag happen to be the same
+* `openstack["db"]["root_user_key"]` - The key used to retrieve the root user password; the key is both the name of the data-bag item and
+  name of the key containing the password value within the data-bag item
+* `openstack["openstack"]["secret"]["user_passwords_data_bag"]` - The name of the data bag used to store the root user password
 
 If the value of the "bind_interface" attribute is non-nil, then the database service will be bound to the first IP address on that interface.  If the value of the "bind_interface" attribute is nil, then the database service will be bound to the IP address specified in the host attribute.
 

@@ -29,16 +29,10 @@ db_endpoint = endpoint 'db'
 
 if node['openstack']['db']['root_user_use_databag']
   super_password = get_password 'user', node['openstack']['db']['root_user_key']
-  node.set_unless['mysql']['server_root_password'] = super_password
 else
   super_password = node['mysql']['server_root_password']
 end
 
-node.set['mysql']['version'] = default_version_for(
-                                 node['platform'],
-                                 node['platform_family'],
-                                 node['platform_version']
-                               )
 node.override['mysql']['tunable']['default-storage-engine'] = 'InnoDB'
 node.override['mysql']['bind_address'] = db_endpoint.host
 node.override['mysql']['tunable']['innodb_thread_concurrency'] = '0'
@@ -49,7 +43,26 @@ node.override['mysql']['tunable']['skip-name-resolve'] = true
 node.override['mysql']['tunable']['character-set-server'] = 'utf8'
 
 include_recipe 'openstack-ops-database::mysql-client'
-include_recipe 'mysql::server'
+
+mysql_service node['mysql']['service_name'] do
+  version node['mysql']['version']
+  port node['mysql']['port']
+  data_dir node['mysql']['data_dir']
+  server_root_password super_password
+  server_debian_password node['mysql']['server_debian_password']
+  server_repl_password node['mysql']['server_repl_password']
+  allow_remote_root node['mysql']['allow_remote_root']
+  remove_anonymous_users node['mysql']['remove_anonymous_users']
+  remove_test_database node['mysql']['remove_test_database']
+  root_network_acl node['mysql']['root_network_acl']
+  action :create
+end
+
+# Set the version attribute based on what was actually
+# installed.
+server_resource = mysql_service node['mysql']['service_name']
+server_version = server_resource.parsed_version
+node.set['mysql']['version'] = server_version
 
 template '/etc/mysql/conf.d/openstack.cnf' do
   owner 'mysql'

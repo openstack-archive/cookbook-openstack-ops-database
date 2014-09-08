@@ -7,14 +7,7 @@ describe 'openstack-ops-database::mysql-server' do
     include_context 'database-stubs'
     let(:runner) { ChefSpec::Runner.new(UBUNTU_OPTS) }
     let(:node) { runner.node }
-    let(:chef_run) do
-      node.set_unless['mysql'] = {
-          'server_debian_password' => 'server-debian-password',
-          'server_root_password' => 'server-root-password',
-          'server_repl_password' => 'server-repl-password'
-      }
-      runner.converge(described_recipe)
-    end
+    let(:chef_run) { runner.converge(described_recipe) }
     let(:file) { chef_run.template('/etc/mysql/conf.d/openstack.cnf') }
 
     it 'sets mysql version to 5.5' do
@@ -34,7 +27,6 @@ describe 'openstack-ops-database::mysql-server' do
 
     it 'includes mysql recipes' do
       expect(chef_run).to include_recipe 'openstack-ops-database::mysql-client'
-      expect(chef_run).to include_recipe 'mysql::server'
     end
 
     it 'creates template /etc/mysql/conf.d/openstack.cnf' do
@@ -66,5 +58,11 @@ describe 'openstack-ops-database::mysql-server' do
       expect(chef_run).to query_mysql_database('FLUSH PRIVILEGES')
     end
 
+    it 'creates mysql service' do
+      node.set['openstack']['db']['root_user_use_databag'] = true
+      # Password is fixed as 'abc123' by spec_helper
+      expect(chef_run).to create_mysql_service('default').with(
+        server_root_password: 'abc123')
+    end
   end
 end
