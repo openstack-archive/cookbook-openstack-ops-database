@@ -7,7 +7,8 @@ This file is used to list changes made in each version of the openstack-ops-data
 * Upgrading berkshelf from 2.0.18 to 3.1.5
 * Switching mysql server recipe to use resource and set password
   directly
-
+* Bump mysql cookbook version for above password patch  
+  
 ## 9.2.0
 * Update database and mysql dependency
 

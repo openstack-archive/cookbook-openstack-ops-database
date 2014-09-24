@@ -17,7 +17,7 @@ recipe 'openstack-db', 'Creates necessary tables, users, and grants for OpenStac
   supports os
 end
 
-depends 'mysql', '~> 5.3'
+depends 'mysql', '~> 5.4'
 depends 'mysql-chef_gem', '~> 0.0.2'
 depends 'postgresql', '~> 3.3'
 depends 'database', '~> 2.2'
