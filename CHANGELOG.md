@@ -2,6 +2,9 @@ openstack-ops-database Cookbook CHANGELG
 ===================================
 This file is used to list changes made in each version of the openstack-ops-database cookbook.
 
+## 9.2.2
+* Updated Berksfile.lock for the UTF8 issue in common
+
 ## 9.2.1
 * Tighten down mysql dependency for default_version_for function
 
