@@ -8,6 +8,8 @@ This file is used to list changes made in each version of the openstack-ops-data
 * Switching mysql server recipe to use resource and set password
   directly
 * Bump mysql cookbook version for above password patch  
+
+* Bump Chef gem to 11.16
   
 ## 9.2.0
 * Update database and mysql dependency
