@@ -1,6 +1,6 @@
 name              'openstack-ops-database'
-maintainer        'Opscode, Inc.'
-maintainer_email  'matt@opscode.com'
+maintainer       'openstack-chef'
+maintainer_email 'opscode-chef-openstack@googlegroups.com'
 license           'Apache 2.0'
 description       'Provides the shared database configuration for Chef for OpenStack.'
 version           '10.0.0'

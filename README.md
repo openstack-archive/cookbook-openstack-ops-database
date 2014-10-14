@@ -19,6 +19,7 @@ The following cookbooks are dependencies:
 * database
 * openstack-common
 * mysql
+* mysql-chef_gem
 * postgresql
 
 # Usage #
@@ -117,12 +118,13 @@ License and Author
 | **Author**           |  Sean Gallagher (<sean.gallagher@.att.com>)        |
 | **Author**           |  John Dewey (<jdewey@att.com>)                     |
 | **Author**           |  Ionut Artarisi (<iartarisi@suse.cz>)              |
+| **Author**           |  Mark Vanderwiel (<vanderwl@us.ibm.com>)           |
 |                      |                                                    |
 | **Copyright**        |  Copyright (c) 2012-2013, Rackspace US, Inc.       |
 | **Copyright**        |  Copyright (c) 2012-2013, Opscode, Inc.            |
 | **Copyright**        |  Copyright (c) 2013, AT&T Services, Inc.           |
 | **Copyright**        |  Copyright (c) 2013-2014, SUSE Linux GmbH          |
-
+| **Copyright**        |  Copyright (c) 2014, IBM, Corp.                    |
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
