@@ -86,6 +86,20 @@ The following attributes are defined in attributes/database.rb of the common coo
 
 If the value of the "bind_interface" attribute is non-nil, then the database service will be bound to the first IP address on that interface.  If the value of the "bind_interface" attribute is nil, then the database service will be bound to the IP address specified in the host attribute.
 
+The following mysql specific attributes are available:
+
+* `['mysql']['tunable']['default-storage-engine']`
+* `['mysql']['bind_address']`
+* `['mysql']['tunable']['innodb_thread_concurrency']`
+* `['mysql']['tunable']['innodb_commit_concurrency']`
+* `['mysql']['tunable']['innodb_read_io_threads']`
+* `['mysql']['tunable']['innodb_flush_log_at_trx_commit']`
+* `['mysql']['tunable']['skip-name-resolve']`
+* `['mysql']['tunable']['character-set-server']`
+* `['mysql']['tunable']['max_connections']`
+
+For more information see: http://dev.mysql.com/doc/refman/5.5/en/server-system-variables.html
+
 Testing
 =====
 

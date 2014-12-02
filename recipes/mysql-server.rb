@@ -41,6 +41,7 @@ node.override['mysql']['tunable']['innodb_read_io_threads'] = '4'
 node.override['mysql']['tunable']['innodb_flush_log_at_trx_commit'] = '2'
 node.override['mysql']['tunable']['skip-name-resolve'] = true
 node.override['mysql']['tunable']['character-set-server'] = 'utf8'
+node.override['mysql']['tunable']['max_connections'] = '1024'
 
 include_recipe 'openstack-ops-database::mysql-client'
 

@@ -9,6 +9,7 @@ This file is used to list changes made in each version of the openstack-ops-data
   directly
 * Bump mysql cookbook version for above password patch  
 * Bump Chef gem to 11.16
+* Allow max_connections override for mysql server
   
 ## 9.2.0
 * Update database and mysql dependency

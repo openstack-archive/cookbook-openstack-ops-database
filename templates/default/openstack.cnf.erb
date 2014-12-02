@@ -12,3 +12,4 @@ innodb_flush_log_at_trx_commit = <%= node['mysql']['tunable']['innodb_flush_log_
 skip-name-resolve
 <% end %>
 character-set-server = <%= node['mysql']['tunable']['character-set-server'] %>
+max_connections = <%= node['mysql']['tunable']['max_connections'] %>

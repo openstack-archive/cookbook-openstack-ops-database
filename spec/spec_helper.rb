@@ -27,6 +27,8 @@ shared_context 'database-stubs' do
     stub_command("/usr/bin/mysql -u root -e 'show databases;'")
     # for debian
     stub_command("\"/usr/bin/mysql\" -u root -e 'show databases;'")
+    # for postgresql
+    stub_command('ls /var/lib/postgresql/9.1/main/recovery.conf')
 
     allow_any_instance_of(Chef::Recipe).to receive(:address_for)
       .with('lo')

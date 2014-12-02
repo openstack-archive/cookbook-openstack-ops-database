@@ -23,6 +23,7 @@ describe 'openstack-ops-database::mysql-server' do
       expect(chef_run.node['mysql']['tunable']['innodb_flush_log_at_trx_commit']).to eql '2'
       expect(chef_run.node['mysql']['tunable']['skip-name-resolve']).to eql true
       expect(chef_run.node['mysql']['tunable']['character-set-server']).to eql 'utf8'
+      expect(chef_run.node['mysql']['tunable']['max_connections']).to eql '1024'
     end
 
     it 'includes mysql recipes' do
@@ -46,7 +47,8 @@ describe 'openstack-ops-database::mysql-server' do
        /^innodb_read_io_threads = 4$/,
        /^innodb_flush_log_at_trx_commit = 2$/,
        /^skip-name-resolve$/,
-       /^character-set-server = utf8$/].each do |line|
+       /^character-set-server = utf8$/,
+       /^max_connections = 1024$/].each do |line|
         expect(chef_run).to render_file(file.name).with_content(line)
       end
     end
