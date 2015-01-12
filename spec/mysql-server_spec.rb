@@ -54,10 +54,10 @@ describe 'openstack-ops-database::mysql-server' do
     end
 
     it 'prepares the database server' do
-      expect(chef_run).to query_mysql_database('FLUSH PRIVILEGES')
+      expect(chef_run).to query_mysql_database('FLUSH PRIVILEGES pre query')
       expect(chef_run).to query_mysql_database('drop empty localhost user')
       expect(chef_run).to drop_mysql_database('test')
-      expect(chef_run).to query_mysql_database('FLUSH PRIVILEGES')
+      expect(chef_run).to query_mysql_database('FLUSH PRIVILEGES post query')
     end
 
     it 'creates mysql service' do
