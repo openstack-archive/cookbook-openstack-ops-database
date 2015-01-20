@@ -26,6 +26,8 @@ describe 'openstack-ops-database::openstack-db' do
       .with 'block-storage', 'cinder', 'test-pass'
     expect_any_instance_of(Chef::Recipe).to receive(:db_create_with_user)
       .with 'orchestration', 'heat', 'test-pass'
+    expect_any_instance_of(Chef::Recipe).to receive(:db_create_with_user)
+      .with 'bare-metal', 'ironic', 'test-pass'
 
     @chef_run.converge(described_recipe)
   end

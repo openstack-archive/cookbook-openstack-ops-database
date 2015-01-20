@@ -69,3 +69,8 @@ db_create_with_user(
   node['openstack']['db']['orchestration']['username'],
   get_password('db', 'heat')
 )
+db_create_with_user(
+  'bare-metal',
+  node['openstack']['db']['bare-metal']['username'],
+  get_password('db', 'ironic')
+)
