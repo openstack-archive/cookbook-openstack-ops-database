@@ -61,7 +61,7 @@ end
 
 # Set the version attribute based on what was actually
 # installed.
-server_resource = mysql_service node['mysql']['service_name']
+server_resource = resources("mysql_service[#{node['mysql']['service_name']}]")
 server_version = server_resource.parsed_version
 node.set['mysql']['version'] = server_version
 
@@ -78,7 +78,7 @@ mysql_connection_info = {
   password: super_password
 }
 
-mysql_database 'FLUSH PRIVILEGES' do
+mysql_database 'FLUSH PRIVILEGES pre query' do
   connection mysql_connection_info
   sql 'FLUSH PRIVILEGES'
   action :query
@@ -100,7 +100,7 @@ mysql_database 'test' do
   action :drop
 end
 
-mysql_database 'FLUSH PRIVILEGES' do
+mysql_database 'FLUSH PRIVILEGES post query' do
   connection mysql_connection_info
   sql 'FLUSH PRIVILEGES'
   action :query
