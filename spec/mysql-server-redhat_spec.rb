@@ -17,8 +17,8 @@ describe 'openstack-ops-database::mysql-server' do
     end
     let(:file) { chef_run.template('/etc/mysql/conf.d/openstack.cnf') }
 
-    it 'sets mysql version to 5.1' do
-      expect(chef_run.node['mysql']['version']).to eql '5.1'
+    it 'sets mysql version to 5.5' do
+      expect(chef_run.node['mysql']['version']).to eql '5.5'
     end
 
     it 'creates template /etc/mysql/conf.d/openstack.cnf' do

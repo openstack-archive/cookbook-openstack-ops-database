@@ -12,12 +12,12 @@ SUSE_OPTS = {
 }
 REDHAT_OPTS = {
   platform: 'redhat',
-  version: '6.5',
+  version: '7.0',
   log_level: ::LOG_LEVEL
 }
 UBUNTU_OPTS = {
   platform: 'ubuntu',
-  version: '12.04',
+  version: '14.04',
   log_level: ::LOG_LEVEL
 }
 
@@ -28,7 +28,7 @@ shared_context 'database-stubs' do
     # for debian
     stub_command("\"/usr/bin/mysql\" -u root -e 'show databases;'")
     # for postgresql
-    stub_command('ls /var/lib/postgresql/9.1/main/recovery.conf')
+    stub_command('ls /var/lib/postgresql/9.3/main/recovery.conf')
 
     allow_any_instance_of(Chef::Recipe).to receive(:address_for)
       .with('lo')

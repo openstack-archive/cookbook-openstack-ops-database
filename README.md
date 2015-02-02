@@ -8,9 +8,9 @@ Chef 11 with Ruby 1.9.x required.
 
 # Platforms #
 
-* Ubuntu-12.04
+* Ubuntu-14.04
 * SLES 11 SP3
-* RHEL/CentOS 6.5
+* RHEL/CentOS 7.0
 
 # Cookbooks #
 
