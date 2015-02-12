@@ -7,14 +7,7 @@ describe 'openstack-ops-database::server' do
     include_context 'database-stubs'
     let(:runner) { ChefSpec::Runner.new(UBUNTU_OPTS) }
     let(:node) { runner.node }
-    let(:chef_run) do
-      node.set_unless['mysql'] = {
-        'server_debian_password' => 'server-debian-password',
-        'server_root_password' => 'server-root-password',
-        'server_repl_password' => 'server-repl-password'
-      }
-      runner.converge(described_recipe)
-    end
+    let(:chef_run) { runner.converge(described_recipe) }
 
     it 'uses mysql database server recipe by default' do
       expect(chef_run).to include_recipe('openstack-ops-database::mysql-server')

@@ -22,86 +22,25 @@
 
 class ::Chef::Recipe # rubocop:disable Documentation
   include ::Openstack
-  include ::Opscode::Mysql::Helpers
 end
 
 db_endpoint = endpoint 'db'
 
-if node['openstack']['db']['root_user_use_databag']
-  super_password = get_password 'user', node['openstack']['db']['root_user_key']
-else
-  super_password = node['mysql']['server_root_password']
-end
-
-node.override['mysql']['tunable']['default-storage-engine'] = 'InnoDB'
-node.override['mysql']['bind_address'] = db_endpoint.host
-node.override['mysql']['tunable']['innodb_thread_concurrency'] = '0'
-node.override['mysql']['tunable']['innodb_commit_concurrency'] = '0'
-node.override['mysql']['tunable']['innodb_read_io_threads'] = '4'
-node.override['mysql']['tunable']['innodb_flush_log_at_trx_commit'] = '2'
-node.override['mysql']['tunable']['skip-name-resolve'] = true
-node.override['mysql']['tunable']['character-set-server'] = 'utf8'
-node.override['mysql']['tunable']['max_connections'] = '1024'
+super_password = get_password 'user', node['openstack']['db']['root_user_key']
 
 include_recipe 'openstack-ops-database::mysql-client'
 
-mysql_service node['mysql']['service_name'] do
-  version node['mysql']['version']
-  port node['mysql']['port']
-  data_dir node['mysql']['data_dir']
-  server_root_password super_password
-  server_debian_password node['mysql']['server_debian_password']
-  server_repl_password node['mysql']['server_repl_password']
-  allow_remote_root node['mysql']['allow_remote_root']
-  remove_anonymous_users node['mysql']['remove_anonymous_users']
-  remove_test_database node['mysql']['remove_test_database']
-  root_network_acl node['mysql']['root_network_acl']
-  action :create
+mysql_service node['openstack']['mysql']['service_name'] do
+  version node['openstack']['mysql']['version']
+  data_dir node['openstack']['mysql']['data_dir'] if node['openstack']['mysql']['data_dir']
+  initial_root_password super_password
+  bind_address db_endpoint.host
+  port db_endpoint.port.to_s
+  action [:create, :start]
 end
 
-# Set the version attribute based on what was actually
-# installed.
-server_resource = resources("mysql_service[#{node['mysql']['service_name']}]")
-server_version = server_resource.parsed_version
-node.set['mysql']['version'] = server_version
-
-template '/etc/mysql/conf.d/openstack.cnf' do
-  owner 'mysql'
-  group 'mysql'
+mysql_config 'openstack' do
   source 'openstack.cnf.erb'
-  notifies :restart, 'mysql_service[default]'
-end
-
-mysql_connection_info = {
-  host: 'localhost',
-  username: 'root',
-  password: super_password
-}
-
-mysql_database 'FLUSH PRIVILEGES pre query' do
-  connection mysql_connection_info
-  sql 'FLUSH PRIVILEGES'
-  action :query
-end
-
-# Unfortunately, this is needed to get around a MySQL bug
-# that repeatedly shows its face when running this in Vagabond
-# containers:
-#
-# http://bugs.mysql.com/bug.php?id=69644
-mysql_database 'drop empty localhost user' do
-  sql "DELETE FROM mysql.user WHERE User = '' OR Password = ''"
-  connection mysql_connection_info
-  action :query
-end
-
-mysql_database 'test' do
-  connection mysql_connection_info
-  action :drop
-end
-
-mysql_database 'FLUSH PRIVILEGES post query' do
-  connection mysql_connection_info
-  sql 'FLUSH PRIVILEGES'
-  action :query
+  notifies :restart, "mysql_service[#{node['openstack']['mysql']['service_name']}]"
+  action :create
 end

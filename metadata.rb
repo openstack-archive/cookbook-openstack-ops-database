@@ -3,7 +3,7 @@ maintainer       'openstack-chef'
 maintainer_email 'opscode-chef-openstack@googlegroups.com'
 license           'Apache 2.0'
 description       'Provides the shared database configuration for Chef for OpenStack.'
-version           '10.0.0'
+version           '10.1.0'
 
 recipe 'client', 'Installs client packages for the database used by the deployment.'
 recipe 'server', 'Installs and configures server packages for the database used by the deployment.'
@@ -17,8 +17,8 @@ recipe 'openstack-db', 'Creates necessary tables, users, and grants for OpenStac
   supports os
 end
 
-depends 'mysql', '~> 5.4'
-depends 'mysql-chef_gem', '~> 0.0.2'
-depends 'postgresql', '~> 3.3'
-depends 'database', '~> 2.2'
-depends 'openstack-common', '>= 10.0.0'
+depends 'mysql', '>= 6.0.13', '< 7.0.0'
+depends 'mysql2_chef_gem', '>= 1.0.1', '< 2.0.0'
+depends 'postgresql', '>= 3.3.0', '< 4.0.0'
+depends 'database', '>= 4.0.2', '< 5.0.0'
+depends 'openstack-common', '>= 10.3.0'

@@ -20,8 +20,13 @@
 # limitations under the License.
 #
 
-include_recipe 'mysql::client'
-include_recipe 'mysql-chef_gem'
+mysql_client 'default' do
+  action :create
+end
+
+mysql2_chef_gem 'default' do
+  action :install
+end
 
 node['openstack']['db']['python_packages']['mysql'].each do |pkg|
   package pkg

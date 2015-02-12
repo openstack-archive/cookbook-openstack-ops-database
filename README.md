@@ -19,7 +19,7 @@ The following cookbooks are dependencies:
 * database
 * openstack-common
 * mysql
-* mysql-chef_gem
+* mysql2_chef_gem
 * postgresql
 
 # Usage #
@@ -77,26 +77,12 @@ The following attributes are defined in attributes/database.rb of the common coo
 * `openstack["endpoints"]["db"]["port"]` - The port to bind the database service to
 * `openstack["endpoints"]["db"]["path"]` - Unused at this time
 * `openstack["endpoints"]["db"]["bind_interface"]` - The interface name to bind the database service to
-* `openstack["db"]["root_user_use_databag"]` - Whether or not to retrieve the root-user password from a data bag; note that if this is set
-  to true, the mysql server_root_password attribute value will be ignored and will not reflect the password value, unless the attribute
-  value and the password retrieved from the data bag happen to be the same
 * `openstack["db"]["root_user_key"]` - The key used to retrieve the root user password; the key is both the name of the data-bag item and
-  name of the key containing the password value within the data-bag item
-* `openstack["openstack"]["secret"]["user_passwords_data_bag"]` - The name of the data bag used to store the root user password
+  name of the key containing the password value within the data-bag item. This is defined in Common.
 
 If the value of the "bind_interface" attribute is non-nil, then the database service will be bound to the first IP address on that interface.  If the value of the "bind_interface" attribute is nil, then the database service will be bound to the IP address specified in the host attribute.
 
-The following mysql specific attributes are available:
-
-* `['mysql']['tunable']['default-storage-engine']`
-* `['mysql']['bind_address']`
-* `['mysql']['tunable']['innodb_thread_concurrency']`
-* `['mysql']['tunable']['innodb_commit_concurrency']`
-* `['mysql']['tunable']['innodb_read_io_threads']`
-* `['mysql']['tunable']['innodb_flush_log_at_trx_commit']`
-* `['mysql']['tunable']['skip-name-resolve']`
-* `['mysql']['tunable']['character-set-server']`
-* `['mysql']['tunable']['max_connections']`
+See the attributes mysql.rb file for the mysql specific attributes that are available.
 
 For more information see: http://dev.mysql.com/doc/refman/5.5/en/server-system-variables.html
 
@@ -138,7 +124,7 @@ License and Author
 | **Copyright**        |  Copyright (c) 2012-2013, Opscode, Inc.            |
 | **Copyright**        |  Copyright (c) 2013, AT&T Services, Inc.           |
 | **Copyright**        |  Copyright (c) 2013-2014, SUSE Linux GmbH          |
-| **Copyright**        |  Copyright (c) 2014, IBM, Corp.                    |
+| **Copyright**        |  Copyright (c) 2014-2015, IBM, Corp.               |
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
