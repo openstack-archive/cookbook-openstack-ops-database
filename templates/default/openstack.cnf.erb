@@ -1,7 +1,7 @@
 <%= node['openstack']['db']['custom_template_banner'] %>
 [mysqld]
 default-storage-engine = <%= node['openstack']['mysql']['default-storage-engine'] %>
-innodb_thread_concurrency= <%= node['openstack']['mysql']['innodb_thread_concurrency'] %>
+innodb_thread_concurrency = <%= node['openstack']['mysql']['innodb_thread_concurrency'] %>
 innodb_commit_concurrency = <%= node['openstack']['mysql']['innodb_commit_concurrency'] %>
 innodb_read_io_threads = <%= node['openstack']['mysql']['innodb_read_io_threads'] %>
 innodb_flush_log_at_trx_commit = <%= node['openstack']['mysql']['innodb_flush_log_at_trx_commit'] %>
