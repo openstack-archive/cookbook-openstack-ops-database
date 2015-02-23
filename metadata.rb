@@ -19,6 +19,6 @@ end
 
 depends 'mysql', '>= 6.0.13', '< 7.0.0'
 depends 'mysql2_chef_gem', '>= 1.0.1', '< 2.0.0'
-depends 'postgresql', '>= 3.3.0', '< 4.0.0'
+depends 'postgresql', '>= 3.4.18', '< 4.0.0'
 depends 'database', '>= 4.0.2', '< 5.0.0'
 depends 'openstack-common', '>= 10.3.0'
