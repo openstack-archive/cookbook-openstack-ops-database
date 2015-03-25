@@ -24,13 +24,24 @@ describe 'openstack-ops-database::mysql-server' do
       )
     end
 
-    it 'creates mysql openstack config and notifies server to restart' do
-      expect(chef_run).to create_mysql_config('openstack').with(
-        source: 'openstack.cnf.erb',
-        action: [:create]
-      )
-      resource = chef_run.find_resource('mysql_config', 'openstack')
-      expect(resource).to notify('mysql_service[default]').to(:restart).delayed
+    describe 'openstack.cnf' do
+      let(:file) { '/etc/mysql/conf.d/openstack.cnf' }
+
+      it 'creates mysql openstack config and notifies server to restart' do
+        expect(chef_run).to create_mysql_config('openstack').with(
+          source: 'openstack.cnf.erb',
+          action: [:create]
+        )
+        resource = chef_run.find_resource('mysql_config', 'openstack')
+        expect(resource).to notify('mysql_service[default]').to(:restart).delayed
+      end
+
+      # TODO: Verify contents of openstack.cnf. This cannot be done properly at
+      # present because the mysql_config LWRP comes from the mysql cookbook but
+      # does not expose a custom matcher for testing the templates contents.
+      # See ChefSpec docs on testing LWRPs from other cookbooks.
+      # See issue filed against mysql cookbook:
+      # https://github.com/chef-cookbooks/mysql/issues/322
     end
   end
 end
