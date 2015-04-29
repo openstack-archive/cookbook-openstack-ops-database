@@ -5,7 +5,7 @@ require_relative 'spec_helper'
 describe 'openstack-ops-database::mariadb-server' do
   describe 'redhat' do
     include_context 'database-stubs'
-    let(:runner) { ChefSpec::Runner.new(REDHAT_OPTS) }
+    let(:runner) { ChefSpec::SoloRunner.new(REDHAT_OPTS) }
     let(:node) { runner.node }
     let(:chef_run) { runner.converge(described_recipe) }
     let(:file) { chef_run.template('/etc/my.cnf.d/openstack.cnf') }

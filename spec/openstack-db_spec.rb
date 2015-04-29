@@ -6,7 +6,7 @@ describe 'openstack-ops-database::openstack-db' do
   include_context 'database-stubs'
 
   before do
-    @chef_run = ::ChefSpec::Runner.new ::UBUNTU_OPTS
+    @chef_run = ::ChefSpec::SoloRunner.new ::UBUNTU_OPTS
   end
 
   it 'creates databases and users' do

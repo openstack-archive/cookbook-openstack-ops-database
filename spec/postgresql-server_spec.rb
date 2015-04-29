@@ -6,7 +6,7 @@ describe 'openstack-ops-database::postgresql-server' do
   describe 'ubuntu' do
     include_context 'database-stubs'
 
-    let(:runner) { ChefSpec::Runner.new(UBUNTU_OPTS) }
+    let(:runner) { ChefSpec::SoloRunner.new(UBUNTU_OPTS) }
     let(:node) { runner.node }
     let(:chef_run) do
       # The postgresql cookbook will raise an 'uninitialized constant
