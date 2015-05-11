@@ -22,12 +22,17 @@ shared_context 'database-stubs' do
     stub_command("/usr/bin/mysql -u root -e 'show databases;'")
     # for debian
     stub_command("\"/usr/bin/mysql\" -u root -e 'show databases;'")
+    stub_command("mysqladmin --user=root --password='' version")
     # for postgresql
     stub_command('ls /var/lib/postgresql/9.3/main/recovery.conf')
+    stub_search('node', "recipes:\"percona\\:\\:cluster\"").and_return([])
 
     allow_any_instance_of(Chef::Recipe).to receive(:address_for)
       .with('lo')
       .and_return('127.0.0.1')
+    allow_any_instance_of(Chef::Recipe).to receive(:address_for)
+      .with('all')
+      .and_return('0.0.0.0')
     allow_any_instance_of(Chef::Recipe).to receive(:get_password)
       .with('db', anything)
       .and_return('test-pass')

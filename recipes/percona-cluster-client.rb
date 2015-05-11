@@ -1,9 +1,7 @@
 # encoding: UTF-8
 #
 # Cookbook Name:: openstack-ops-database
-# Recipe:: openstack-db
-#
-# Copyright 2012-2013, AT&T Services, Inc.
+# Recipe:: percona-cluster-client
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,18 +16,13 @@
 # limitations under the License.
 #
 
-class ::Chef::Recipe # rubocop:disable Documentation
-  include ::Openstack
+include_recipe 'percona::client'
+
+mysql2_chef_gem 'default' do
+  provider Chef::Provider::Mysql2ChefGem::Percona
+  action :install
 end
 
-node['openstack']['common']['services'].each do |service, project|
-  begin
-    password = get_password('db', project)
-    openstack_common_database service do
-      user node['openstack']['db'][service]['username']
-      pass password
-    end
-  rescue Net::HTTPServerException, ChefVault::Exceptions::KeysNotFound
-    log "No databag item containing the database password for #{project} was found, so no database was created"
-  end
+node['openstack']['db']['python_packages']['percona-cluster'].each do |pkg|
+  package pkg
 end
