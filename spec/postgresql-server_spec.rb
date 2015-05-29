@@ -12,7 +12,7 @@ describe 'openstack-ops-database::postgresql-server' do
       # The postgresql cookbook will raise an 'uninitialized constant
       # Chef::Application' error without this attribute when running
       # the tests
-      node.set_unless['postgresql']['password']['postgres'] = String.new
+      node.set_unless['postgresql']['password']['postgres'] = ''
 
       runner.converge(described_recipe)
     end

@@ -1,9 +1,9 @@
-name              'openstack-ops-database'
-maintainer       'openstack-chef'
+name 'openstack-ops-database'
+maintainer 'openstack-chef'
 maintainer_email 'opscode-chef-openstack@googlegroups.com'
-license           'Apache 2.0'
-description       'Provides the shared database configuration for Chef for OpenStack.'
-version           '11.0.0'
+license 'Apache 2.0'
+description 'Provides the shared database configuration for Chef for OpenStack.'
+version '11.0.0'
 
 recipe 'client', 'Installs client packages for the database used by the deployment.'
 recipe 'server', 'Installs and configures server packages for the database used by the deployment.'
@@ -15,7 +15,7 @@ recipe 'postgresql-client', 'Installs PostgreSQL client packages.'
 recipe 'postgresql-server', 'Installs and configures PostgreSQL server packages.'
 recipe 'openstack-db', 'Creates necessary tables, users, and grants for OpenStack.'
 
-%w{ fedora ubuntu redhat centos suse }.each do |os|
+%w(fedora ubuntu redhat centos suse).each do |os|
   supports os
 end
 

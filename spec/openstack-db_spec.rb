@@ -13,7 +13,7 @@ describe 'openstack-ops-database::openstack-db' do
     expect_any_instance_of(Chef::Recipe).to receive(:db_create_with_user)
       .with('compute', 'nova', 'test-pass')
     expect_any_instance_of(Chef::Recipe).to receive(:db_create_with_user)
-      .with 'dashboard', 'dash', 'test-pass'
+      .with 'dashboard', 'horizon', 'test-pass'
     expect_any_instance_of(Chef::Recipe).to receive(:db_create_with_user)
       .with 'identity', 'keystone', 'test-pass'
     expect_any_instance_of(Chef::Recipe).to receive(:db_create_with_user)
