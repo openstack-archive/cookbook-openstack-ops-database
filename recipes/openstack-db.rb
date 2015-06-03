@@ -22,55 +22,14 @@ class ::Chef::Recipe # rubocop:disable Documentation
   include ::Openstack
 end
 
-db_create_with_user(
-  'compute',
-  node['openstack']['db']['compute']['username'],
-  get_password('db', 'nova')
-)
-
-db_create_with_user(
-  'dashboard',
-  node['openstack']['db']['dashboard']['username'],
-  get_password('db', 'horizon')
-)
-
-db_create_with_user(
-  'identity',
-  node['openstack']['db']['identity']['username'],
-  get_password('db', 'keystone')
-)
-
-db_create_with_user(
-  'image',
-  node['openstack']['db']['image']['username'],
-  get_password('db', 'glance')
-)
-
-db_create_with_user(
-  'telemetry',
-  node['openstack']['db']['telemetry']['username'],
-  get_password('db', 'ceilometer')
-)
-
-db_create_with_user(
-  'network',
-  node['openstack']['db']['network']['username'],
-  get_password('db', 'neutron')
-)
-
-db_create_with_user(
-  'block-storage',
-  node['openstack']['db']['block-storage']['username'],
-  get_password('db', 'cinder')
-)
-
-db_create_with_user(
-  'orchestration',
-  node['openstack']['db']['orchestration']['username'],
-  get_password('db', 'heat')
-)
-db_create_with_user(
-  'bare-metal',
-  node['openstack']['db']['bare-metal']['username'],
-  get_password('db', 'ironic')
-)
+node['openstack']['common']['services'].each do |service, project|
+  begin
+    password = get_password('db', project)
+    openstack_common_database service do
+      user node['openstack']['db'][service]['username']
+      pass password
+    end
+  rescue Net::HTTPServerException
+    log "No databag item containing the database password for #{project} was found, so no database was created"
+  end
+end

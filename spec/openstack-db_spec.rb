@@ -4,31 +4,31 @@ require_relative 'spec_helper'
 
 describe 'openstack-ops-database::openstack-db' do
   include_context 'database-stubs'
+  describe 'ubuntu' do
+    let(:runner) { ChefSpec::SoloRunner.new(UBUNTU_OPTS) }
+    let(:node) { runner.node }
+    let(:chef_run) { runner.converge(described_recipe) }
 
-  before do
-    @chef_run = ::ChefSpec::SoloRunner.new ::UBUNTU_OPTS
-  end
-
-  it 'creates databases and users' do
-    expect_any_instance_of(Chef::Recipe).to receive(:db_create_with_user)
-      .with('compute', 'nova', 'test-pass')
-    expect_any_instance_of(Chef::Recipe).to receive(:db_create_with_user)
-      .with 'dashboard', 'horizon', 'test-pass'
-    expect_any_instance_of(Chef::Recipe).to receive(:db_create_with_user)
-      .with 'identity', 'keystone', 'test-pass'
-    expect_any_instance_of(Chef::Recipe).to receive(:db_create_with_user)
-      .with 'image', 'glance', 'test-pass'
-    expect_any_instance_of(Chef::Recipe).to receive(:db_create_with_user)
-      .with 'telemetry', 'ceilometer', 'test-pass'
-    expect_any_instance_of(Chef::Recipe).to receive(:db_create_with_user)
-      .with 'network', 'neutron', 'test-pass'
-    expect_any_instance_of(Chef::Recipe).to receive(:db_create_with_user)
-      .with 'block-storage', 'cinder', 'test-pass'
-    expect_any_instance_of(Chef::Recipe).to receive(:db_create_with_user)
-      .with 'orchestration', 'heat', 'test-pass'
-    expect_any_instance_of(Chef::Recipe).to receive(:db_create_with_user)
-      .with 'bare-metal', 'ironic', 'test-pass'
-
-    @chef_run.converge(described_recipe)
+    it 'creates all openstack service databases and the corresponding users' do
+      {
+        'bare-metal' => 'ironic',
+        'block-storage' => 'cinder',
+        'compute' => 'nova',
+        'dashboard' => 'horizon',
+        'database' => 'trove',
+        'identity' => 'keystone',
+        'image' => 'glance',
+        'network' => 'neutron',
+        'object-storage' => 'swift',
+        'orchestration' => 'heat',
+        'telemetry' => 'ceilometer'
+      }.each do |service, _project|
+        expect(chef_run).to create_openstack_common_database(service)
+          .with(user: node['openstack']['db'][service]['username'],
+                pass: 'test-pass')
+      end
+      ## TODO: utilize _project and create test for rescue with specific log message
+      ##       when databag does not exist
+    end
   end
 end
