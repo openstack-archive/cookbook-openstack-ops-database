@@ -40,6 +40,8 @@ node.override['mariadb']['mysqld']['max_connections'] = node['openstack']['mysql
 node.override['mariadb']['mysqld']['bind_address'] = node['openstack']['mysql']['bind_address']
 node.override['mariadb']['mysqld']['binlog_format'] = node['openstack']['mysql']['binlog_format']
 node.override['mariadb']['use_default_repository'] = true
+node.override['mariadb']['galera']['cluster_name'] = node['openstack']['galera']['cluster_name']
+node.override['mariadb']['galera']['wsrep_provider'] = '/usr/lib64/galera/libgalera_smm.so'
 include_recipe 'mariadb::galera'
 
 # reuse mysql configuration file for mariadb
