@@ -3,7 +3,7 @@ maintainer        'Opscode, Inc.'
 maintainer_email  'matt@opscode.com'
 license           'Apache 2.0'
 description       'Provides the shared database configuration for Chef for OpenStack.'
-version           '9.0.1'
+version           '9.0.2'
 
 recipe 'client', 'Installs client packages for the database used by the deployment.'
 recipe 'server', 'Installs and configures server packages for the database used by the deployment.'
