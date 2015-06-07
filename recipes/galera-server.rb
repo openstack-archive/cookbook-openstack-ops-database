@@ -28,8 +28,6 @@ else
   super_password = node['mysql']['server_root_password']
 end
 
-Chef::Log.info "[Autumn] super_password is  #{super_password}"
-
 node.override['mysql']['root_password'] = super_password
   
 include_recipe 'galera::server'
