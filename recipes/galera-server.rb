@@ -38,7 +38,7 @@ include_recipe 'openstack-ops-database::mariadb-client'
 node.override['mariadb']['mysqld']['default_storage_engine'] = node['openstack']['mysql']['default-storage-engine']
 node.override['mariadb']['mysqld']['max_connections'] = node['openstack']['mysql']['max_connections']
 node.override['mariadb']['mysqld']['bind_address'] = node['openstack']['mysql']['bind_address']
-node.override['mariadb']['mysqld']['binlog_format'] = node['openstack']['mysql']['binlog_format']
+node.override['mariadb']['options']['mysqld']['binlog_format'] = node['openstack']['mysql']['binlog_format']
 node.override['mariadb']['use_default_repository'] = true
 node.override['mariadb']['galera']['cluster_name'] = node['openstack']['galera']['cluster_name']
 node.override['mariadb']['galera']['wsrep_provider'] = '/usr/lib64/galera/libgalera_smm.so'
