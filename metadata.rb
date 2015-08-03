@@ -19,7 +19,7 @@ recipe 'openstack-db', 'Creates necessary tables, users, and grants for OpenStac
   supports os
 end
 
-depends 'mariadb', '~> 0.3.0'
+depends 'mariadb', '~> 0.3.1'
 depends 'mysql', '~> 6.0.13'
 depends 'mysql2_chef_gem', '~> 1.0.1'
 depends 'postgresql', '~> 3.4.18'
