@@ -25,7 +25,7 @@ class ::Chef::Recipe # rubocop:disable Documentation
   include ::Openstack
 end
 
-db_endpoint = endpoint 'db'
+db_endpoint = node['openstack']['endpoints']['db']
 
 node.override['postgresql']['config']['listen_addresses'] = db_endpoint.host
 

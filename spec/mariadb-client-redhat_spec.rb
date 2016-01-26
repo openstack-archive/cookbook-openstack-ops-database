@@ -3,7 +3,7 @@
 require_relative 'spec_helper'
 
 describe 'openstack-ops-database::mariadb-client' do
-  describe 'suse' do
+  describe 'redhat' do
     let(:runner) { ChefSpec::SoloRunner.new(REDHAT_OPTS) }
     let(:node) do
       runner.node.set['openstack']['db']['service_type'] = 'mariadb'

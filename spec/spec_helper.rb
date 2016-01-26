@@ -5,11 +5,6 @@ require 'chefspec/berkshelf'
 ChefSpec::Coverage.start! { add_filter 'openstack-ops-database' }
 
 LOG_LEVEL = :fatal
-SUSE_OPTS = {
-  platform: 'suse',
-  version: '11.3',
-  log_level: ::LOG_LEVEL
-}
 REDHAT_OPTS = {
   platform: 'redhat',
   version: '7.1',

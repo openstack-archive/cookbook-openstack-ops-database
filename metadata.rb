@@ -3,7 +3,7 @@ maintainer 'openstack-chef'
 maintainer_email 'openstack-dev@lists.openstack.org'
 license 'Apache 2.0'
 description 'Provides the shared database configuration for Chef for OpenStack.'
-version '12.0.0'
+version '13.0.0'
 
 recipe 'client', 'Installs client packages for the database used by the deployment.'
 recipe 'server', 'Installs and configures server packages for the database used by the deployment.'
@@ -15,7 +15,7 @@ recipe 'postgresql-client', 'Installs PostgreSQL client packages.'
 recipe 'postgresql-server', 'Installs and configures PostgreSQL server packages.'
 recipe 'openstack-db', 'Creates necessary tables, users, and grants for OpenStack.'
 
-%w(fedora ubuntu redhat centos suse).each do |os|
+%w(ubuntu redhat centos).each do |os|
   supports os
 end
 
@@ -24,4 +24,4 @@ depends 'mysql', '~> 6.0.13'
 depends 'mysql2_chef_gem', '~> 1.0.1'
 depends 'postgresql', '~> 3.4.18'
 depends 'database', '~> 4.0.2'
-depends 'openstack-common', '>= 12.0.0'
+depends 'openstack-common', '>= 13.0.0'

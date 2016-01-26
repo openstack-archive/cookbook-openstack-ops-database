@@ -20,7 +20,7 @@ class ::Chef::Recipe # rubocop:disable Documentation
   include ::Openstack
 end
 
-db_endpoint = endpoint 'db'
+db_endpoint = node['openstack']['endpoints']['db']
 super_password = get_password 'user', node['openstack']['db']['root_user_key']
 
 node.override['mariadb']['allow_root_pass_change'] = true
