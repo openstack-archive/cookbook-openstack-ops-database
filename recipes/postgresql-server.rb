@@ -25,9 +25,14 @@ class ::Chef::Recipe # rubocop:disable Documentation
   include ::Openstack
 end
 
-db_endpoint = node['openstack']['endpoints']['db']
+bind_db = node['openstack']['bind_service']['db']
+if bind_db['interface']
+  listen_address = address_for bind_db['interface']
+else
+  listen_address = bind_db['host']
+end
 
-node.override['postgresql']['config']['listen_addresses'] = db_endpoint.host
+node.override['postgresql']['config']['listen_addresses'] = listen_address
 
 include_recipe 'openstack-ops-database::postgresql-client'
 include_recipe 'postgresql::server'

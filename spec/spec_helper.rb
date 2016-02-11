@@ -32,7 +32,7 @@ shared_context 'database-stubs' do
       .with('db', anything)
       .and_return('test-pass')
     allow_any_instance_of(Chef::Recipe).to receive(:get_password)
-      .with('user', 'mysqlroot')
+      .with('db', 'mysqlroot')
       .and_return('abc123')
   end
 end

@@ -59,7 +59,7 @@ describe 'openstack-ops-database::mariadb-server' do
     end
 
     it 'allow root remote access' do
-      node.set['openstack']['endpoints']['db']['host'] = '192.168.1.1'
+      node.set['openstack']['bind_service']['db']['host'] = '192.168.1.1'
       expect(chef_run.node['mariadb']['forbid_remote_root']).to be false
     end
 

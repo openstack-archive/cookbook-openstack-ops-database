@@ -24,9 +24,14 @@ class ::Chef::Recipe # rubocop:disable Documentation
   include ::Openstack
 end
 
-db_endpoint = node['openstack']['endpoints']['db']
+bind_db = node['openstack']['bind_service']['db']
+if bind_db['interface']
+  listen_address = address_for bind_db['interface']
+else
+  listen_address = bind_db['host']
+end
 
-super_password = get_password 'user', node['openstack']['db']['root_user_key']
+super_password = get_password 'db', node['openstack']['db']['root_user_key']
 
 include_recipe 'openstack-ops-database::mysql-client'
 
@@ -34,8 +39,8 @@ mysql_service node['openstack']['mysql']['service_name'] do
   version node['openstack']['mysql']['version']
   data_dir node['openstack']['mysql']['data_dir'] if node['openstack']['mysql']['data_dir']
   initial_root_password super_password
-  bind_address db_endpoint.host
-  port db_endpoint.port.to_s
+  bind_address listen_address
+  port bind_db.port.to_s
   action [:create, :start]
 end
 

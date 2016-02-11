@@ -20,15 +20,21 @@ class ::Chef::Recipe # rubocop:disable Documentation
   include ::Openstack
 end
 
-db_endpoint = node['openstack']['endpoints']['db']
-super_password = get_password 'user', node['openstack']['db']['root_user_key']
+bind_db = node['openstack']['bind_service']['db']
+if bind_db['interface']
+  listen_address = address_for bind_db['interface']
+else
+  listen_address = bind_db['host']
+end
+
+super_password = get_password 'db', node['openstack']['db']['root_user_key']
 
 node.override['mariadb']['allow_root_pass_change'] = true
 node.override['mariadb']['server_root_password'] = super_password
-node.override['mariadb']['mysqld']['bind_address'] = db_endpoint.host
+node.override['mariadb']['mysqld']['bind_address'] = listen_address
 node.override['mariadb']['install']['prefer_os_package'] = true
 
-unless db_endpoint.host == '127.0.0.1' || db_endpoint.host == 'localhost'
+unless listen_address == '127.0.0.1' || listen_address == 'localhost'
   node.override['mariadb']['forbid_remote_root'] = false
 end
 
