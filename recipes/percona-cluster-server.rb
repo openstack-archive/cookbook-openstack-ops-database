@@ -41,7 +41,7 @@ node.normal['percona']['cluster']['wsrep_provider_options'] = "\"gmcast.listen_a
 # query_cache is not supported with wsrep
 node.normal['percona']['server']['query_cache_size'] = 0
 # find all nodes in the percona cluster
-cluster_nodes = search(:node, 'recipes:"percona\:\:cluster"')
+cluster_nodes = search(:node, 'recipes:"percona\:\:cluster"').sort
 # if it's the first node make sure that wsrep_cluster_address is set to nothing to be able to bootstrap.
 is_first_node = cluster_nodes.empty? || (cluster_nodes.size == 1 && cluster_nodes.first['fqdn'] == node['fqdn'])
 if is_first_node
