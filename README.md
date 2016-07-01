@@ -4,7 +4,7 @@ This cookbook provides a reference example of database configuration for the Ope
 
 # Requirements #
 
-Chef 11 with Ruby 1.9.x required.
+ChefDK 0.15.15 with Ruby 2.1.x required.
 
 # Platforms #
 

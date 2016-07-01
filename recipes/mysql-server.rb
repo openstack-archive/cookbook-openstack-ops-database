@@ -25,11 +25,11 @@ class ::Chef::Recipe # rubocop:disable Documentation
 end
 
 bind_db = node['openstack']['bind_service']['db']
-if bind_db['interface']
-  listen_address = address_for bind_db['interface']
-else
-  listen_address = bind_db['host']
-end
+listen_address = if bind_db['interface']
+                   address_for bind_db['interface']
+                 else
+                   listen_address = bind_db['host']
+                 end
 
 super_password = get_password 'db', node['openstack']['db']['root_user_key']
 
