@@ -23,6 +23,9 @@ Encoding:
 NumericLiterals:
   Enabled: false
 
+StringLiterals:
+  Enabled: false
+
 LineLength:
   Enabled: false
 
