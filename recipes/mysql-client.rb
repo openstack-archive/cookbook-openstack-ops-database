@@ -28,6 +28,11 @@ mysql2_chef_gem 'default' do
   action :install
 end
 
+# Note(frickler): Work around for https://github.com/chef/chef-dk/issues/966
+bash 'fix gem ext dir' do
+  code "rmdir ~/.chefdk/gem/ruby/2.1.0/extensions && ln -s /opt/chefdk/embedded/lib/ruby/gems/2.1.0/extensions ~/.chefdk/gem/ruby/2.1.0/extensions || true"
+end
+
 node['openstack']['db']['python_packages']['mysql'].each do |pkg|
   package pkg
 end

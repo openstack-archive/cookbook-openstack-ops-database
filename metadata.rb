@@ -23,8 +23,8 @@ end
 
 depends 'mariadb', '~> 0.3.1'
 depends 'percona', '~> 0.16.1'
-depends 'mysql', '~> 6.0.13'
-depends 'mysql2_chef_gem', '~> 1.0.1'
+depends 'mysql', '~> 7.2.0'
+depends 'mysql2_chef_gem', '~> 1.1.0'
 depends 'postgresql', '~> 3.4.18'
 depends 'database', '~> 4.0.2'
 depends 'openstack-common', '>= 14.0.0'
