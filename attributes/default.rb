@@ -1,4 +1,4 @@
-# encoding: UTF-8#
+# encoding: UTF-8
 #
 # Cookbook Name:: openstack-ops-database
 # Recipe:: default
