@@ -13,7 +13,7 @@ describe 'openstack-ops-database::mariadb-server' do
     it 'overrides mariadb default attributes' do
       expect(chef_run.node['mariadb']['mysqld']['bind_address']).to eq '127.0.0.1'
       expect(chef_run.node['mariadb']['mysqld']['default_storage_engine']).to eq 'InnoDB'
-      expect(chef_run.node['mariadb']['mysqld']['max_connections']).to eq '151'
+      expect(chef_run.node['mariadb']['mysqld']['max_connections']).to eq '307'
       expect(chef_run.node['mariadb']['forbid_remote_root']).to be true
     end
 
@@ -42,7 +42,7 @@ describe 'openstack-ops-database::mariadb-server' do
        /^innodb_log_buffer_size = 8388608$/,
        /^character-set-server = latin1$/,
        /^query_cache_size = 0$/,
-       /^max_connections = 151$/].each do |line|
+       /^max_connections = 307$/].each do |line|
         expect(chef_run).to render_config_file(file.name)\
           .with_section_content('mysqld', line)
       end

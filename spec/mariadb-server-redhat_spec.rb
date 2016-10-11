@@ -30,7 +30,7 @@ describe 'openstack-ops-database::mariadb-server' do
        /^innodb_log_buffer_size = 8388608$/,
        /^character-set-server = latin1$/,
        /^query_cache_size = 0$/,
-       /^max_connections = 151$/].each do |line|
+       /^max_connections = 307$/].each do |line|
         expect(chef_run).to render_config_file(file.name)\
           .with_section_content('mysqld', line)
       end

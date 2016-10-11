@@ -54,4 +54,4 @@ default['openstack']['mysql']['character-set-server'] = 'latin1'
 # Memory allocated for caching query results
 default['openstack']['mysql']['query_cache_size'] = '0'
 # Maximum number of connections
-default['openstack']['mysql']['max_connections'] = '151'
+default['openstack']['mysql']['max_connections'] = '307'
