@@ -84,7 +84,7 @@ If the value of the "bind_interface" attribute is non-nil, then the database ser
 
 See the attributes mysql.rb file for the mysql specific attributes that are available.
 
-For more information see: http://dev.mysql.com/doc/refman/5.5/en/server-system-variables.html
+For more information see: http://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html
 
 Testing
 =====

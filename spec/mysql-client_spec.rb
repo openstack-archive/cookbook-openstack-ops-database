@@ -19,6 +19,7 @@ describe 'openstack-ops-database::mysql-client' do
 
     it 'installs mysql packages' do
       expect(chef_run).to install_package 'python-mysqldb'
+      expect(chef_run).to install_package 'libmysqlclient-dev'
     end
   end
 end

@@ -11,7 +11,7 @@ describe 'openstack-ops-database::mariadb-server' do
     let(:file) { chef_run.template('/etc/my.cnf.d/openstack.cnf') }
 
     it 'creates template /etc/my.cnf.d/openstack.cnf' do
-      node.set['mariadb']['install']['version'] = '5.5'
+      node.set['mariadb']['install']['version'] = '5.7'
       expect(chef_run).to create_template(file.name).with(
         user: 'mysql',
         group: 'mysql',

@@ -15,8 +15,8 @@ describe 'openstack-ops-database::mysql-server' do
 
     it 'creates mysql default service' do
       expect(chef_run).to create_mysql_service('default').with(
-        version: '5.5',
-        data_dir: nil,
+        version: '5.7',
+        data_dir: '/var/lib/mysql-default',
         initial_root_password: 'abc123',
         bind_address: '127.0.0.1',
         port: '3306',

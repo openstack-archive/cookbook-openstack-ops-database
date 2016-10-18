@@ -16,15 +16,15 @@
 # limitations under the License.
 #
 
-# MySql attributes that we use the mysql cookbook defaults:
+# MySQL attributes that we use the mysql cookbook defaults:
 
 # Data directory
 default['openstack']['mysql']['data_dir'] = nil
 
-# MySql attributes that we select defaults for:
+# MySQL attributes that we select defaults for:
 
-# Version, support 5.5 and above
-default['openstack']['mysql']['version'] = '5.5'
+# Version, support 5.7 and above
+default['openstack']['mysql']['version'] = '5.7'
 # Service name
 default['openstack']['mysql']['service_name'] = 'default'
 # Storage engine, base OpenStack requires the InnoDB flavor

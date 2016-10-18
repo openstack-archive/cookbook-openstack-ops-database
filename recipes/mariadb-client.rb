@@ -21,6 +21,7 @@ include_recipe 'mariadb::client'
 
 mysql2_chef_gem 'default' do
   provider Chef::Provider::Mysql2ChefGem::Mariadb
+  gem_version '0.4.4'
   action :install
 end
 
