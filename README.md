@@ -1,3 +1,10 @@
+Team and repository tags
+========================
+
+[![Team and repository tags](http://governance.openstack.org/badges/cookbook-openstack-ops-database.svg)](http://governance.openstack.org/reference/tags/index.html)
+
+<!-- Change things from this point on -->
+
 # Description #
 
 This cookbook provides a reference example of database configuration for the OpenStack deployment provided by Chef for OpenStack. It currently supports MySQL and PostgreSQL.
