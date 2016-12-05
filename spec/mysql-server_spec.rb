@@ -24,6 +24,23 @@ describe 'openstack-ops-database::mysql-server' do
       )
     end
 
+    describe 'creates mysql service with different values' do
+      before do
+        node.set['openstack']['mysql']['data_dir'] = '/other-dir'
+        node.set['openstack']['mysql']['version'] = '5.7'
+      end
+      it do
+        expect(chef_run).to create_mysql_service('default').with(
+          version: '5.7',
+          data_dir: '/other-dir',
+          initial_root_password: 'abc123',
+          bind_address: '127.0.0.1',
+          port: '3306',
+          action: [:create, :start]
+        )
+      end
+    end
+
     describe 'openstack.cnf' do
       let(:file) { '/etc/mysql/conf.d/openstack.cnf' }
 
