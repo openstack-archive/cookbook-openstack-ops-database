@@ -21,10 +21,20 @@
 #
 
 mysql_client 'default' do
+  version node['openstack']['mysql']['version']
   action :create
 end
 
+# install the mysql development headers
+case node['platform_family']
+when 'debian'
+  package 'libmysqlclient-dev'
+when 'rhel'
+  package 'mariadb-devel'
+end
+
 mysql2_chef_gem 'default' do
+  gem_version '0.4.4'
   action :install
 end
 
