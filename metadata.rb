@@ -5,7 +5,7 @@ issues_url 'https://launchpad.net/openstack-chef' if respond_to?(:issues_url)
 source_url 'https://github.com/openstack/cookbook-openstack-ops-database' if respond_to?(:source_url)
 license 'Apache 2.0'
 description 'Provides the shared database configuration for Chef for OpenStack.'
-version '14.0.0'
+version '15.0.0'
 
 recipe 'client', 'Installs client packages for the database used by the deployment.'
 recipe 'server', 'Installs and configures server packages for the database used by the deployment.'
@@ -27,4 +27,4 @@ depends 'mysql', '~> 8.2'
 depends 'mysql2_chef_gem', '~> 1.1'
 depends 'postgresql', '~> 5.1'
 depends 'database', '~> 6.1'
-depends 'openstack-common', '>= 14.0.0'
+depends 'openstack-common', '>= 15.0.0'
