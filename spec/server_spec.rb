@@ -21,7 +21,8 @@ describe 'openstack-ops-database::server' do
       node.set['postgresql']['password']['postgres'] = 'postgres_password'
 
       expect(chef_run).to include_recipe(
-        'openstack-ops-database::postgresql-server')
+        'openstack-ops-database::postgresql-server'
+      )
     end
   end
 end

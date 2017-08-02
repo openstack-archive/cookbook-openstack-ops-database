@@ -16,11 +16,6 @@ describe 'openstack-ops-database::mariadb-client' do
       expect(chef_run).to include_recipe('mariadb::client')
     end
 
-    it 'install mysql2 gem package' do
-      expect(chef_run).to install_mysql2_chef_gem('default')
-        .with(provider: Chef::Provider::Mysql2ChefGem::Mariadb)
-    end
-
     it 'installs mariadb python client packages' do
       expect(chef_run).to install_package('python-mysqldb')
     end

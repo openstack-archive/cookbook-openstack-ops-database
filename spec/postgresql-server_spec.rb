@@ -19,7 +19,8 @@ describe 'openstack-ops-database::postgresql-server' do
 
     it 'includes postgresql recipes' do
       expect(chef_run).to include_recipe(
-        'openstack-ops-database::postgresql-client')
+        'openstack-ops-database::postgresql-client'
+      )
       expect(chef_run).to include_recipe('postgresql::server')
     end
   end
