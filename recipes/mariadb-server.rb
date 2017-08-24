@@ -16,7 +16,7 @@
 # limitations under the License.
 #
 
-class ::Chef::Recipe # rubocop:disable Documentation
+class ::Chef::Recipe
   include ::Openstack
 end
 
@@ -59,7 +59,7 @@ end
 mysql_connection_info = {
   host: 'localhost',
   username: 'root',
-  password: super_password
+  password: super_password,
 }
 
 mysql_database 'drop empty and default users' do

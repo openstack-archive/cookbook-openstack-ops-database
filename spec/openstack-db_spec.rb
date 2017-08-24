@@ -21,7 +21,7 @@ describe 'openstack-ops-database::openstack-db' do
         'network' => 'neutron',
         'object-storage' => 'swift',
         'orchestration' => 'heat',
-        'telemetry' => 'ceilometer'
+        'telemetry' => 'ceilometer',
       }.each do |service, _project|
         expect(chef_run).to create_openstack_common_database(service)
           .with(user: node['openstack']['db'][service]['username'],
