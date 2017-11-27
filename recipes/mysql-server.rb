@@ -40,7 +40,7 @@ mysql_service node['openstack']['mysql']['service_name'] do
   data_dir node['openstack']['mysql']['data_dir'] if node['openstack']['mysql']['data_dir']
   initial_root_password super_password
   bind_address listen_address
-  port bind_db.port.to_s
+  port bind_db['port'].to_s
   action [:create, :start]
 end
 

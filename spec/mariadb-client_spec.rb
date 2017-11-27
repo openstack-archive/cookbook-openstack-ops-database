@@ -7,7 +7,7 @@ describe 'openstack-ops-database::mariadb-client' do
   describe 'ubuntu' do
     let(:runner) { ChefSpec::SoloRunner.new(UBUNTU_OPTS) }
     let(:node) do
-      runner.node.set['openstack']['db']['service_type'] = 'mariadb'
+      runner.node.override['openstack']['db']['service_type'] = 'mariadb'
       runner.node
     end
     let(:chef_run) { runner.converge(described_recipe) }
@@ -18,10 +18,6 @@ describe 'openstack-ops-database::mariadb-client' do
 
     it 'installs mariadb python client packages' do
       expect(chef_run).to install_package('python-mysqldb')
-    end
-
-    it 'override prefer os package' do
-      expect(chef_run.node['mariadb']['install']['prefer_os_package']).to be true
     end
   end
 end

@@ -15,6 +15,8 @@ describe 'openstack-ops-database::mariadb-server' do
       expect(chef_run.node['mariadb']['mysqld']['default_storage_engine']).to eq 'InnoDB'
       expect(chef_run.node['mariadb']['mysqld']['max_connections']).to eq '307'
       expect(chef_run.node['mariadb']['forbid_remote_root']).to be true
+      expect(chef_run.node['mariadb']['remove_anonymous_users']).to be true
+      expect(chef_run.node['mariadb']['remove_test_database']).to be true
     end
 
     it 'includes mariadb recipes' do
@@ -23,7 +25,7 @@ describe 'openstack-ops-database::mariadb-server' do
     end
 
     it 'creates template /etc/mysql/conf.d/openstack.cnf' do
-      node.set['mariadb']['install']['version'] = '5.7'
+      node.override['mariadb']['install']['version'] = '10.1'
       expect(chef_run).to create_template(file.name).with(
         user: 'mysql',
         group: 'mysql',
@@ -54,23 +56,9 @@ describe 'openstack-ops-database::mariadb-server' do
       expect(chef_run.node['mariadb']['server_root_password']).to eq 'abc123'
     end
 
-    it 'override prefer os package' do
-      expect(chef_run.node['mariadb']['install']['prefer_os_package']).to be true
-    end
-
     it 'allow root remote access' do
-      node.set['openstack']['bind_service']['db']['host'] = '192.168.1.1'
+      node.override['openstack']['bind_service']['db']['host'] = '192.168.1.1'
       expect(chef_run.node['mariadb']['forbid_remote_root']).to be false
-    end
-
-    it 'drop anonymous and empty users' do
-      expect(chef_run).to query_mysql_database('drop empty and default users')\
-        .with(database_name: 'mysql',
-              sql: "DELETE FROM mysql.user WHERE User = '' OR Password = ''")
-      expect(chef_run).to drop_mysql_database('test')
-      expect(chef_run).to query_mysql_database('flush priviledges after cleanup')\
-        .with(database_name: 'mysql',
-              sql: 'FLUSH PRIVILEGES')
     end
   end
 end

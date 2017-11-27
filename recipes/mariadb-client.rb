@@ -16,11 +16,11 @@
 # limitations under the License.
 #
 
-node.override['mariadb']['install']['prefer_os_package'] = true
+node.normal['mariadb']['use_default_repository'] = true
 include_recipe 'mariadb::client'
 
 mysql2_chef_gem_mariadb 'default' do
-  gem_version '0.4.5'
+  gem_version '0.4.9'
   action :install
 end
 

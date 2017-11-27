@@ -1,6 +1,11 @@
-source "https://supermarket.chef.io"
+source 'https://supermarket.chef.io'
+
+%w(common).each do |cookbook|
+  if Dir.exist?("../cookbook-openstack-#{cookbook}")
+    cookbook "openstack-#{cookbook}", path: "../cookbook-openstack-#{cookbook}"
+  else
+    cookbook "openstack-#{cookbook}", github: "openstack/cookbook-openstack-#{cookbook}"
+  end
+end
 
 metadata
-
-cookbook "openstack-common",
-  github: "openstack/cookbook-openstack-common"

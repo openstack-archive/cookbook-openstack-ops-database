@@ -9,20 +9,9 @@ describe 'openstack-ops-database::server' do
     let(:node) { runner.node }
     let(:chef_run) { runner.converge(described_recipe) }
 
-    it 'uses mysql database server recipe by default' do
-      expect(chef_run).to include_recipe('openstack-ops-database::mysql-server')
-    end
-
-    it 'uses postgresql database server recipe when configured' do
-      node.set['openstack']['db']['service_type'] = 'postgresql'
-      # The postgresql cookbook will raise an 'uninitialized constant
-      # Chef::Application' error without this attribute when running
-      # the tests
-      node.set['postgresql']['password']['postgres'] = 'postgres_password'
-
-      expect(chef_run).to include_recipe(
-        'openstack-ops-database::postgresql-server'
-      )
+    it 'uses mariadb server recipe by default' do
+      node.set['openstack']['db']['service_type'] = 'mariadb'
+      expect(chef_run).to include_recipe('openstack-ops-database::mariadb-server')
     end
   end
 end

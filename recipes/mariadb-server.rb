@@ -30,20 +30,20 @@ listen_address = if bind_db['interface']
 
 super_password = get_password 'db', node['openstack']['db']['root_user_key']
 
-node.override['mariadb']['allow_root_pass_change'] = true
-node.override['mariadb']['server_root_password'] = super_password
-node.override['mariadb']['mysqld']['bind_address'] = listen_address
-node.override['mariadb']['install']['prefer_os_package'] = true
+node.normal['mariadb']['remove_test_database'] = true
+node.normal['mariadb']['allow_root_pass_change'] = true
+node.normal['mariadb']['server_root_password'] = super_password
+node.normal['mariadb']['mysqld']['bind_address'] = listen_address
 
 unless listen_address == '127.0.0.1' || listen_address == 'localhost'
-  node.override['mariadb']['forbid_remote_root'] = false
+  node.normal['mariadb']['forbid_remote_root'] = false
 end
 
 include_recipe 'openstack-ops-database::mariadb-client'
 
 # reuse mysql configuration for mariadb
-node.override['mariadb']['mysqld']['default_storage_engine'] = node['openstack']['mysql']['default-storage-engine']
-node.override['mariadb']['mysqld']['max_connections'] = node['openstack']['mysql']['max_connections']
+node.normal['mariadb']['mysqld']['default_storage_engine'] = node['openstack']['mysql']['default-storage-engine']
+node.normal['mariadb']['mysqld']['max_connections'] = node['openstack']['mysql']['max_connections']
 include_recipe 'mariadb::server'
 
 # reuse mysql configuration file for mariadb
@@ -52,31 +52,4 @@ template "#{node['mariadb']['configuration']['includedir']}/openstack.cnf" do
   group 'mysql'
   source 'openstack.cnf.erb'
   notifies :restart, 'service[mysql]'
-end
-
-# Current mariadb cookbook does not handle deleting anonymous users and default
-# users. We need to delete them here.
-mysql_connection_info = {
-  host: 'localhost',
-  username: 'root',
-  password: super_password,
-}
-
-mysql_database 'drop empty and default users' do
-  database_name 'mysql'
-  sql "DELETE FROM mysql.user WHERE User = '' OR Password = ''"
-  connection mysql_connection_info
-  action :query
-end
-
-mysql_database 'test' do
-  connection mysql_connection_info
-  action :drop
-end
-
-mysql_database 'flush priviledges after cleanup' do
-  database_name 'mysql'
-  sql 'FLUSH PRIVILEGES'
-  connection mysql_connection_info
-  action :query
 end

@@ -6,7 +6,7 @@ describe 'openstack-ops-database::mariadb-client' do
   describe 'redhat' do
     let(:runner) { ChefSpec::SoloRunner.new(REDHAT_OPTS) }
     let(:node) do
-      runner.node.set['openstack']['db']['service_type'] = 'mariadb'
+      runner.node.override['openstack']['db']['service_type'] = 'mariadb'
       runner.node
     end
     let(:chef_run) { runner.converge(described_recipe) }

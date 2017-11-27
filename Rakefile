@@ -1,32 +1,32 @@
 task default: ["test"]
 
-task :test => [:syntax, :lint, :unit]
+task test: [:syntax, :lint, :unit]
 
 desc "Vendor the cookbooks in the Berksfile"
 task :berks_prep do
-  sh %{chef exec berks vendor}
+  sh %(chef exec berks vendor)
 end
 
 desc "Run FoodCritic (syntax) tests"
 task :syntax do
-  sh %{chef exec foodcritic --exclude spec -f any .}
+  sh %(chef exec foodcritic --exclude spec -f any .)
 end
 
 desc "Run RuboCop (lint) tests"
 task :lint do
-  sh %{chef exec cookstyle}
+  sh %(chef exec cookstyle)
 end
 
 desc "Run RSpec (unit) tests"
-task :unit => :berks_prep do
-  sh %{chef exec rspec --format documentation}
+task unit: :berks_prep do
+  sh %(chef exec rspec --format documentation)
 end
 
 desc "Remove the berks-cookbooks directory and the Berksfile.lock"
 task :clean do
   rm_rf [
     'berks-cookbooks',
-    'Berksfile.lock'
+    'Berksfile.lock',
   ]
 end
 
@@ -37,4 +37,3 @@ task :integration do
   load './Rakefile-Common'
   Rake::Task["common_integration"].invoke
 end
-

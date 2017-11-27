@@ -7,7 +7,7 @@ ChefSpec::Coverage.start! { add_filter 'openstack-ops-database' }
 LOG_LEVEL = :fatal
 REDHAT_OPTS = {
   platform: 'redhat',
-  version: '7.1',
+  version: '7.3',
   log_level: ::LOG_LEVEL,
 }.freeze
 UBUNTU_OPTS = {
@@ -23,9 +23,6 @@ shared_context 'database-stubs' do
     # for debian
     stub_command("\"/usr/bin/mysql\" -u root -e 'show databases;'")
     stub_command("mysqladmin --user=root --password='' version")
-    # for postgresql
-    stub_command('ls /var/lib/postgresql/9.5/main/recovery.conf')
-    stub_search('node', "recipes:\"percona\\:\\:cluster\"").and_return([])
 
     allow_any_instance_of(Chef::Recipe).to receive(:address_for)
       .with('lo')

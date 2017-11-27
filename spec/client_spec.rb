@@ -9,15 +9,9 @@ describe 'openstack-ops-database::client' do
     let(:node) { runner.node }
     let(:chef_run) { runner.converge(described_recipe) }
 
-    it 'uses mysql database client recipe by default' do
-      expect(chef_run).to include_recipe 'openstack-ops-database::mysql-client'
-    end
-
-    it 'uses postgresql database client recipe when configured' do
-      node.set['openstack']['db']['service_type'] = 'postgresql'
-      node.set['postgresql']['password']['postgres'] = 'secret'
-
-      expect(chef_run).to include_recipe 'openstack-ops-database::postgresql-client'
+    it 'uses mariadb client recipe by default' do
+      node.set['openstack']['db']['service_type'] = 'mariadb'
+      expect(chef_run).to include_recipe 'openstack-ops-database::mariadb-client'
     end
   end
 end
