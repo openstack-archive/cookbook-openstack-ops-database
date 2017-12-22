@@ -16,6 +16,7 @@ BlockLength:
 # SupportedStyles: nested, compact
 Style/ClassAndModuleChildren:
   Exclude:
+    - 'recipes/mariadb-cluster-server.rb'
     - 'recipes/mariadb-server.rb'
     - 'recipes/mysql-server.rb'
     - 'recipes/openstack-db.rb'

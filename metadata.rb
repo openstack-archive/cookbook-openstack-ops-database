@@ -3,7 +3,7 @@ maintainer       'openstack-chef'
 maintainer_email 'openstack-dev@lists.openstack.org'
 license          'Apache 2.0'
 description      'Provides the shared database configuration for Chef for OpenStack.'
-version          '15.0.0'
+version          '15.1.0'
 
 recipe 'client', 'Installs client packages for the database used by the deployment.'
 recipe 'server', 'Installs and configures server packages for the database used by the deployment.'
@@ -13,6 +13,8 @@ recipe 'mariadb-client', 'Installs MariaDB client packages.'
 recipe 'mariadb-server', 'Installs and configures MariaDB server packages.'
 recipe 'postgresql-client', 'Installs PostgreSQL client packages.'
 recipe 'postgresql-server', 'Installs and configures PostgreSQL server packages.'
+recipe 'mariadb-cluster-client', 'Installs MariaDB Cluster client packages.'
+recipe 'mariadb-cluster-server', 'Installs and configures MariaDB Cluster server packages.'
 recipe 'openstack-db', 'Creates necessary tables, users, and grants for OpenStack.'
 
 %w(ubuntu redhat centos).each do |os|
