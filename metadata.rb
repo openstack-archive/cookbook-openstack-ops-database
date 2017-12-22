@@ -11,6 +11,8 @@ recipe 'mysql-client', 'Installs MySQL client packages.'
 recipe 'mysql-server', 'Installs and configures MySQL server packages.'
 recipe 'mariadb-client', 'Installs MariaDB client packages.'
 recipe 'mariadb-server', 'Installs and configures MariaDB server packages.'
+recipe 'mariadb-cluster-client', 'Installs MariaDB Cluster client packages.'
+recipe 'mariadb-cluster-server', 'Installs and configures MariaDB Cluster server packages.'
 recipe 'openstack-db', 'Creates necessary tables, users, and grants for OpenStack.'
 
 %w(ubuntu redhat centos).each do |os|
