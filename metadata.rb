@@ -3,7 +3,7 @@ maintainer       'openstack-chef'
 maintainer_email 'openstack-dev@lists.openstack.org'
 license          'Apache-2.0'
 description      'Provides the shared database configuration for OpenStack'
-version          '16.0.0'
+version          '17.0.0'
 
 recipe 'client', 'Installs client packages for the database used by the deployment.'
 recipe 'server', 'Installs and configures server packages for the database used by the deployment.'
@@ -19,7 +19,7 @@ recipe 'openstack-db', 'Creates necessary tables, users, and grants for OpenStac
   supports os
 end
 
-depends 'openstack-common', '>= 16.0.0'
+depends 'openstack-common', '>= 17.0.0'
 
 depends 'mariadb', '~> 1.5'
 depends 'mysql', '~> 8.2'
