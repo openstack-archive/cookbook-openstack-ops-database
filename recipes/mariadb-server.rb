@@ -35,6 +35,9 @@ node.normal['mariadb']['allow_root_pass_change'] = true
 node.normal['mariadb']['server_root_password'] = super_password
 node.normal['mariadb']['mysqld']['bind_address'] = listen_address
 
+# increase the default from 5 seconds to allow extra time for services to warm up
+node.normal['mariadb']['connect_timeout'] = 30
+
 unless listen_address == '127.0.0.1' || listen_address == 'localhost'
   node.normal['mariadb']['forbid_remote_root'] = false
 end
