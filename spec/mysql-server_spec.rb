@@ -26,8 +26,8 @@ describe 'openstack-ops-database::mysql-server' do
 
     describe 'creates mysql service with different values' do
       before do
-        node.set['openstack']['mysql']['data_dir'] = '/other-dir'
-        node.set['openstack']['mysql']['version'] = '5.7'
+        node.override['openstack']['mysql']['data_dir'] = '/other-dir'
+        node.override['openstack']['mysql']['version'] = '5.7'
       end
       it do
         expect(chef_run).to create_mysql_service('default').with(

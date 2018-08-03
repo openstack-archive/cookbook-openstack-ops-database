@@ -10,7 +10,7 @@ describe 'openstack-ops-database::server' do
     let(:chef_run) { runner.converge(described_recipe) }
 
     it 'uses mariadb server recipe by default' do
-      node.set['openstack']['db']['service_type'] = 'mariadb'
+      node.override['openstack']['db']['service_type'] = 'mariadb'
       expect(chef_run).to include_recipe('openstack-ops-database::mariadb-server')
     end
   end
