@@ -23,10 +23,14 @@ class ::Chef::Recipe
 end
 
 node['openstack']['common']['services'].each do |service, project|
+  old_services = %w(baremetal block-storage application-catalog
+                    object-storage telemetry-metric)
+  next if old_services.include?(service)
   begin
+    username = node['openstack']['db'][service]['username']
     password = get_password('db', project)
     openstack_common_database service do
-      user node['openstack']['db'][service]['username']
+      user username
       pass password
     end
   rescue Net::HTTPServerException, ChefVault::Exceptions::KeysNotFound

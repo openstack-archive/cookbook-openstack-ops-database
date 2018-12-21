@@ -11,15 +11,12 @@ describe 'openstack-ops-database::openstack-db' do
 
     it 'creates all openstack service databases and the corresponding users' do
       {
-        'bare-metal' => 'ironic',
-        'block-storage' => 'cinder',
         'compute' => 'nova',
         'dashboard' => 'horizon',
         'database' => 'trove',
         'identity' => 'keystone',
         'image' => 'glance',
         'network' => 'neutron',
-        'object-storage' => 'swift',
         'orchestration' => 'heat',
         'telemetry' => 'ceilometer',
       }.each do |service, _project|
