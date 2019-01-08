@@ -1,6 +1,6 @@
 name             'openstack-ops-database'
 maintainer       'openstack-chef'
-maintainer_email 'openstack-dev@lists.openstack.org'
+maintainer_email 'openstack-discuss@lists.openstack.org'
 license          'Apache-2.0'
 description      'Provides the shared database configuration for OpenStack'
 version          '18.0.0'
