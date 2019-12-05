@@ -17,7 +17,7 @@ describe 'openstack-ops-database::mariadb-client' do
     end
 
     it 'installs mariadb python client packages' do
-      expect(chef_run).to install_package('python-mysqldb')
+      expect(chef_run).to install_package('python3-mysqldb')
     end
   end
 end

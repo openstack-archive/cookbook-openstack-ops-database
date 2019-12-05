@@ -22,9 +22,9 @@ end
 depends 'openstack-common', '>= 18.0.0'
 
 depends 'mariadb', '~> 1.5'
-depends 'mysql', '~> 8.2'
+depends 'mysql', '~> 8.6'
 depends 'mysql2_chef_gem', '~> 2.0'
 
-issues_url 'https://launchpad.net/openstack-chef' if respond_to?(:issues_url)
-source_url 'https://github.com/openstack/cookbook-openstack-ops-database' if respond_to?(:source_url)
-chef_version '>= 12.5' if respond_to?(:chef_version)
+issues_url 'https://launchpad.net/openstack-chef'
+source_url 'https://opendev.org/openstack/cookbook-openstack-ops-database'
+chef_version '>= 14.0'
