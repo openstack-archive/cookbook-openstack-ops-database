@@ -4,8 +4,8 @@ require_relative 'spec_helper'
 
 describe 'openstack-ops-database::mysql-client' do
   include_context 'database-stubs'
-  describe 'ubuntu' do
-    let(:runner) { ChefSpec::SoloRunner.new(UBUNTU_OPTS) }
+  describe 'redhat' do
+    let(:runner) { ChefSpec::SoloRunner.new(REDHAT_OPTS) }
     let(:node) { runner.node }
     cached(:chef_run) { runner.converge(described_recipe) }
 
@@ -18,8 +18,8 @@ describe 'openstack-ops-database::mysql-client' do
     end
 
     it 'installs mysql packages' do
-      expect(chef_run).to install_package 'python3-mysqldb'
-      expect(chef_run).to install_package 'libmysqlclient-dev'
+      expect(chef_run).to install_package 'MySQL-python'
+      expect(chef_run).to install_package 'mariadb-devel'
     end
   end
 end

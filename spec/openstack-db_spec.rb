@@ -7,7 +7,7 @@ describe 'openstack-ops-database::openstack-db' do
   describe 'ubuntu' do
     let(:runner) { ChefSpec::SoloRunner.new(UBUNTU_OPTS) }
     let(:node) { runner.node }
-    let(:chef_run) { runner.converge(described_recipe) }
+    cached(:chef_run) { runner.converge(described_recipe) }
 
     it 'creates all openstack service databases and the corresponding users' do
       {

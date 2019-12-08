@@ -7,7 +7,7 @@ describe 'openstack-ops-database::server' do
     include_context 'database-stubs'
     let(:runner) { ChefSpec::SoloRunner.new(UBUNTU_OPTS) }
     let(:node) { runner.node }
-    let(:chef_run) { runner.converge(described_recipe) }
+    cached(:chef_run) { runner.converge(described_recipe) }
 
     it 'uses mariadb server recipe by default' do
       node.override['openstack']['db']['service_type'] = 'mariadb'

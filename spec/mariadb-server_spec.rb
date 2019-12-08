@@ -7,7 +7,7 @@ describe 'openstack-ops-database::mariadb-server' do
     include_context 'database-stubs'
     let(:runner) { ChefSpec::SoloRunner.new(UBUNTU_OPTS) }
     let(:node) { runner.node }
-    let(:chef_run) { runner.converge(described_recipe) }
+    cached(:chef_run) { runner.converge(described_recipe) }
     let(:file) { chef_run.template('/etc/mysql/conf.d/openstack.cnf') }
 
     it 'overrides mariadb default attributes' do
@@ -56,9 +56,14 @@ describe 'openstack-ops-database::mariadb-server' do
       expect(chef_run.node['mariadb']['server_root_password']).to eq 'abc123'
     end
 
-    it 'allow root remote access' do
-      node.override['openstack']['bind_service']['db']['host'] = '192.168.1.1'
-      expect(chef_run.node['mariadb']['forbid_remote_root']).to be false
+    context 'set db host to 192.168.1.1' do
+      cached(:chef_run) do
+        node.override['openstack']['bind_service']['db']['host'] = '192.168.1.1'
+        runner.converge(described_recipe)
+      end
+      it 'allow root remote access' do
+        expect(chef_run.node['mariadb']['forbid_remote_root']).to be false
+      end
     end
   end
 end

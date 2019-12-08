@@ -7,11 +7,13 @@ describe 'openstack-ops-database::mariadb-server' do
     include_context 'database-stubs'
     let(:runner) { ChefSpec::SoloRunner.new(REDHAT_OPTS) }
     let(:node) { runner.node }
-    let(:chef_run) { runner.converge(described_recipe) }
+    cached(:chef_run) do
+      node.override['mariadb']['install']['version'] = '5.7'
+      runner.converge(described_recipe)
+    end
     let(:file) { chef_run.template('/etc/my.cnf.d/openstack.cnf') }
 
     it 'creates template /etc/my.cnf.d/openstack.cnf' do
-      node.override['mariadb']['install']['version'] = '5.7'
       expect(chef_run).to create_template(file.name).with(
         user: 'mysql',
         group: 'mysql',
@@ -31,8 +33,7 @@ describe 'openstack-ops-database::mariadb-server' do
        /^character-set-server = latin1$/,
        /^query_cache_size = 0$/,
        /^max_connections = 307$/].each do |line|
-        expect(chef_run).to render_config_file(file.name)\
-          .with_section_content('mysqld', line)
+        expect(chef_run).to render_config_file(file.name).with_section_content('mysqld', line)
       end
     end
   end
