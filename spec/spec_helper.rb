@@ -15,7 +15,7 @@ REDHAT_OPTS = {
 
 UBUNTU_OPTS = {
   platform: 'ubuntu',
-  version: '16.04',
+  version: '18.04',
 }.freeze
 
 shared_context 'database-stubs' do
