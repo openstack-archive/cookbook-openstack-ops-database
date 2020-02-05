@@ -1,10 +1,10 @@
 # encoding: UTF-8
 #
-# Cookbook Name:: openstack-ops-database
+# Cookbook:: openstack-ops-database
 # Recipe:: server
 #
-# Copyright 2013, Opscode, Inc.
-# Copyright 2013, AT&T Services, Inc.
+# Copyright:: 2013, Opscode, Inc.
+# Copyright:: 2013, AT&T Services, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.

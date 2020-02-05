@@ -1,6 +1,6 @@
 # encoding: UTF-8
 #
-# Cookbook Name:: openstack-ops-database
+# Cookbook:: openstack-ops-database
 # Recipe:: default
 #
 # Licensed under the Apache License, Version 2.0 (the "License");

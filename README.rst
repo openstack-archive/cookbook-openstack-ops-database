@@ -14,8 +14,8 @@ supports MySQL and PostgreSQL.
 Requirements
 ============
 
-- Chef 14 or higher
-- ChefDK 3.2.30 for testing (also includes Berkshelf for cookbook
+- Chef 15 or higher
+- Chef Workstation 0.15.18 for testing (also includes Berkshelf for cookbook
   dependency resolution)
 
 Platforms
@@ -33,7 +33,7 @@ The following cookbooks are dependencies:
 - 'mariadb', '~> 1.5'
 - 'mysql2_chef_gem' , '~> 2.0'
 - 'mysql', '~> 8.2'
-- 'openstack-common', '~> 18.0.0'
+- 'openstack-common', '~> 19.0.0'
 
 Usage
 =====
@@ -184,6 +184,8 @@ License and Author
 +-----------------+---------------------------------------------------+
 | **Author**      | Jan Klare (j.klare@x-ion.de)                      |
 +-----------------+---------------------------------------------------+
+| **Author**      | Lance Albertson (lance@osuosl.org)                |
++-----------------+---------------------------------------------------+
 
 +-----------------+---------------------------------------------------+
 | **Copyright**   | Copyright (c) 2012-2013, Rackspace US, Inc.       |
@@ -195,6 +197,8 @@ License and Author
 | **Copyright**   | Copyright (c) 2013-2014, SUSE Linux GmbH          |
 +-----------------+---------------------------------------------------+
 | **Copyright**   | Copyright (c) 2014-2015, IBM, Corp.               |
++-----------------+---------------------------------------------------+
+| **Copyright**   | Copyright (c) 2019-2020, Oregon State University  |
 +-----------------+---------------------------------------------------+
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may
