@@ -14,12 +14,12 @@ describe 'openstack-ops-database::mariadb-client' do
       runner.converge(described_recipe)
     end
 
-    it 'includes mariadb client recipes' do
-      expect(chef_run).to include_recipe('mariadb::client')
+    it do
+      expect(chef_run).to add_mariadb_repository('default').with(version: '10.3')
     end
 
     it do
-      expect(chef_run).to install_mysql2_chef_gem_mariadb('default').with(gem_version: '0.4.9')
+      expect(chef_run).to install_mariadb_client_install('default').with(version: '10.3')
     end
 
     it 'installs mariadb python client packages' do

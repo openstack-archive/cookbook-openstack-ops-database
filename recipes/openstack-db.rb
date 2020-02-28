@@ -29,7 +29,7 @@ node['openstack']['common']['services'].each do |service, project|
   begin
     username = node['openstack']['db'][service]['username']
     password = get_password('db', project)
-    openstack_common_database service do
+    openstack_database service do
       user username
       pass password
     end

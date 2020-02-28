@@ -23,24 +23,26 @@ default['openstack']['mysql']['data_dir'] = nil
 
 # MySQL attributes that we select defaults for:
 
-# Version, support 5.7 and above
+# Mysql version, support 5.7 and above
 default['openstack']['mysql']['version'] = '5.7'
+# MariaDB version
+default['openstack']['mariadb']['version'] = '10.3'
 # Service name
 default['openstack']['mysql']['service_name'] = 'default'
 # Storage engine, base OpenStack requires the InnoDB flavor
 default['openstack']['mysql']['default-storage-engine'] = 'InnoDB'
 # InnoDB lock mode for generating auto-increment values
-default['openstack']['mysql']['innodb_autoinc_lock_mode'] = '1'
+default['openstack']['mysql']['innodb_autoinc_lock_mode'] = 1
 # InnoDB give each table its own file
-default['openstack']['mysql']['innodb_file_per_table'] = 'OFF'
+default['openstack']['mysql']['innodb_file_per_table'] = 0
 # InnoDB thread concurrency
-default['openstack']['mysql']['innodb_thread_concurrency'] = '0'
+default['openstack']['mysql']['innodb_thread_concurrency'] = 0
 # InnoDB commit concurrency
-default['openstack']['mysql']['innodb_commit_concurrency'] = '0'
+default['openstack']['mysql']['innodb_commit_concurrency'] = 0
 # InnoDB number of read io threads
-default['openstack']['mysql']['innodb_read_io_threads'] = '4'
+default['openstack']['mysql']['innodb_read_io_threads'] = 4
 # InnoDB number of commit transactions to flush log
-default['openstack']['mysql']['innodb_flush_log_at_trx_commit'] = '1'
+default['openstack']['mysql']['innodb_flush_log_at_trx_commit'] = 1
 # InnoDB memory buffer for caching table data and indexes
 default['openstack']['mysql']['innodb_buffer_pool_size'] = '134217728'
 # InnoDB size of each log file in a log group
@@ -54,4 +56,4 @@ default['openstack']['mysql']['character-set-server'] = 'latin1'
 # Memory allocated for caching query results
 default['openstack']['mysql']['query_cache_size'] = '0'
 # Maximum number of connections
-default['openstack']['mysql']['max_connections'] = '307'
+default['openstack']['mysql']['max_connections'] = 307

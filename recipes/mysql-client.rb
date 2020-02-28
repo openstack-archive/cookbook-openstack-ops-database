@@ -33,11 +33,6 @@ when 'rhel'
   package 'mariadb-devel'
 end
 
-mysql2_chef_gem 'default' do
-  gem_version '0.4.5'
-  action :install
-end
-
 node['openstack']['db']['python_packages']['mysql'].each do |pkg|
   package pkg
 end

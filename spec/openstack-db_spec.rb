@@ -20,9 +20,8 @@ describe 'openstack-ops-database::openstack-db' do
         'orchestration' => 'heat',
         'telemetry' => 'ceilometer',
       }.each do |service, _project|
-        expect(chef_run).to create_openstack_common_database(service)
-          .with(user: node['openstack']['db'][service]['username'],
-                pass: 'test-pass')
+        expect(chef_run).to create_openstack_database(service)
+          .with(user: node['openstack']['db'][service]['username'], pass: 'test-pass')
       end
       ## TODO: utilize _project and create test for rescue with specific log message
       ##       when databag does not exist

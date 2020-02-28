@@ -15,13 +15,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+mariadb_repository 'default' do
+  version node['openstack']['mariadb']['version']
+end
 
-node.normal['mariadb']['use_default_repository'] = true
-include_recipe 'mariadb::client'
-
-mysql2_chef_gem_mariadb 'default' do
-  gem_version '0.4.9'
-  action :install
+mariadb_client_install 'default' do
+  version node['openstack']['mariadb']['version']
 end
 
 node['openstack']['db']['python_packages']['mariadb'].each do |pkg|

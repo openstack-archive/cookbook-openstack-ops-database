@@ -8,52 +8,62 @@ describe 'openstack-ops-database::mariadb-server' do
     let(:runner) { ChefSpec::SoloRunner.new(UBUNTU_OPTS) }
     let(:node) { runner.node }
     cached(:chef_run) { runner.converge(described_recipe) }
-    let(:file) { chef_run.template('/etc/mysql/conf.d/openstack.cnf') }
-
-    it 'overrides mariadb default attributes' do
-      expect(chef_run.node['mariadb']['mysqld']['bind_address']).to eq '127.0.0.1'
-      expect(chef_run.node['mariadb']['mysqld']['default_storage_engine']).to eq 'InnoDB'
-      expect(chef_run.node['mariadb']['mysqld']['max_connections']).to eq '307'
-      expect(chef_run.node['mariadb']['forbid_remote_root']).to be true
-      expect(chef_run.node['mariadb']['remove_anonymous_users']).to be true
-      expect(chef_run.node['mariadb']['remove_test_database']).to be true
-    end
 
     it 'includes mariadb recipes' do
       expect(chef_run).to include_recipe('openstack-ops-database::mariadb-client')
-      expect(chef_run).to include_recipe('mariadb::server')
     end
 
-    it 'creates template /etc/mysql/conf.d/openstack.cnf' do
-      node.override['mariadb']['install']['version'] = '10.1'
-      expect(chef_run).to create_template(file.name).with(
-        user: 'mysql',
-        group: 'mysql',
-        source: 'openstack.cnf.erb'
+    it do
+      expect(chef_run).to install_mariadb_server_install('default').with(
+        version: '10.3',
+        password: 'abc123'
       )
-      expect(file).to notify('service[mysql]')
-      [/^default-storage-engine = InnoDB$/,
-       /^innodb_autoinc_lock_mode = 1$/,
-       /^innodb_file_per_table = OFF$/,
-       /^innodb_thread_concurrency = 0$/,
-       /^innodb_commit_concurrency = 0$/,
-       /^innodb_read_io_threads = 4$/,
-       /^innodb_flush_log_at_trx_commit = 1$/,
-       /^innodb_buffer_pool_size = 134217728$/,
-       /^innodb_log_file_size = 5242880$/,
-       /^innodb_log_buffer_size = 8388608$/,
-       /^character-set-server = latin1$/,
-       /^query_cache_size = 0$/,
-       /^max_connections = 307$/].each do |line|
-        expect(chef_run).to render_config_file(file.name)\
-          .with_section_content('mysqld', line)
-      end
     end
 
-    it 'creates mariadb with root password' do
-      # Password is fixed as 'abc123' by spec_helper
-      expect(chef_run.node['mariadb']['allow_root_pass_change']).to be true
-      expect(chef_run.node['mariadb']['server_root_password']).to eq 'abc123'
+    it do
+      expect(chef_run).to create_mariadb_server_install('default')
+    end
+
+    it do
+      expect(chef_run).to modify_mariadb_server_configuration('default').with(
+        innodb_buffer_pool_size: '134217728',
+        innodb_file_per_table: 0,
+        innodb_log_buffer_size: '8388608',
+        innodb_log_file_size: '5242880',
+        innodb_options: {
+          innodb_autoinc_lock_mode: 1,
+          innodb_thread_concurrency: 0,
+          innodb_commit_concurrency: 0,
+          innodb_read_io_threads: 4,
+          innodb_flush_log_at_trx_commit: 1,
+        },
+        mysqld_bind_address: '127.0.0.1',
+        mysqld_connect_timeout: 30,
+        mysqld_default_storage_engine: 'InnoDB',
+        mysqld_max_connections: 307,
+        mysqld_query_cache_size: '0',
+        mysqld_skip_name_resolve: false,
+        mysqld_options: {
+          'character-set-server' => 'latin1',
+        },
+        version: '10.3'
+      )
+    end
+
+    it do
+      expect(chef_run.mariadb_server_configuration('default')).to notify('service[mysql]').to(:restart).immediately
+    end
+
+    it do
+      expect(chef_run).to drop_mariadb_user('anonymous').with(
+        username: '',
+        host: 'localhost',
+        ctrl_password: 'abc123'
+      )
+    end
+
+    it do
+      expect(chef_run).to drop_mariadb_database('test').with(password: 'abc123')
     end
 
     context 'set db host to 192.168.1.1' do
@@ -61,8 +71,10 @@ describe 'openstack-ops-database::mariadb-server' do
         node.override['openstack']['bind_service']['db']['host'] = '192.168.1.1'
         runner.converge(described_recipe)
       end
-      it 'allow root remote access' do
-        expect(chef_run.node['mariadb']['forbid_remote_root']).to be false
+      it do
+        expect(chef_run).to modify_mariadb_server_configuration('default').with(
+          mysqld_bind_address: '192.168.1.1'
+        )
       end
     end
   end
