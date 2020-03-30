@@ -12,7 +12,6 @@ end
 depends 'openstack-common', '>= 19.0.0'
 
 depends 'mariadb', '~> 3.1'
-depends 'mysql', '~> 8.6'
 
 issues_url 'https://launchpad.net/openstack-chef'
 source_url 'https://opendev.org/openstack/cookbook-openstack-ops-database'

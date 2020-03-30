@@ -9,7 +9,7 @@ Description
 
 This cookbook provides a reference example of database configuration for
 the OpenStack deployment provided by Chef for OpenStack. It currently
-supports MySQL and PostgreSQL.
+supports MariaDB.
 
 Requirements
 ============
@@ -30,9 +30,7 @@ Cookbooks
 
 The following cookbooks are dependencies:
 
-- 'mariadb', '~> 1.5'
-- 'mysql2_chef_gem' , '~> 2.0'
-- 'mysql', '~> 8.2'
+- 'mariadb', '~> 3.1'
 - 'openstack-common', '~> 19.0.0'
 
 Usage
@@ -69,16 +67,6 @@ server
 
 - Installs and configures server packages for the database used by the
   deployment.
-
-mysql-client
-------------
-
-- Installs MySQL client packages and mysql client python packages.
-
-mysql-server
-------------
-
-- Configures the MySQL server for OpenStack.
 
 mariadb-client
 --------------
