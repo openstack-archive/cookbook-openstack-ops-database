@@ -26,6 +26,8 @@ shared_context 'database-stubs' do
     stub_command("\"/usr/bin/mysql\" -u root -e 'show databases;'")
     stub_command("mysqladmin --user=root --password='' version")
 
+    stub_search('node', 'recipes:"openstack-ops-database\:\:mariadb-cluster-server"').and_return([])
+
     allow_any_instance_of(Chef::Recipe).to receive(:address_for)
       .with('lo')
       .and_return('127.0.0.1')

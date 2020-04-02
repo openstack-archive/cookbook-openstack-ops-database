@@ -23,24 +23,20 @@ end
 ## INFO: to use this recipe, set node['openstack']['db']['service_type'] = 'mariadb-cluster' in your environment
 
 bind_db = node['openstack']['bind_service']['db']
-if bind_db['interface']
-  listen_address = address_for bind_db['interface']
-  node.default['mariadb']['galera']['options']['port'] = bind_db['port']
-else
-  listen_address = bind_db['host']
-  node.default['mariadb']['galera']['options']['port'] = node['openstack']['endpoints']['db']['port']
+if bind_db['interface'].nil?
+  Chef::Log.fatal('Need to specify interface to bind to.')
+  raise
 end
-node.default['mariadb']['galera']['options']['bind-address'] = listen_address
+listen_address = address_for(bind_db['interface'])
 
 ## CLUSTER SPECIFIC CONFIG
-node.default['mariadb']['galera']['cluster_name'] = 'openstack'
-node.default['mariadb']['galera']['wsrep_provider_options']['gmcast.listen_addr'] = "tcp://#{listen_address}:4567"
+gmcast_listen_addr = "tcp://#{listen_address}:4567"
 ### find all nodes in the mariadb cluster
 cluster_nodes = search(:node, 'recipes:"openstack-ops-database\:\:mariadb-cluster-server"').sort
 # if it's the first node make sure that wsrep_cluster_address is set to nothing to be able to bootstrap.
 is_first_node = cluster_nodes.empty? || (cluster_nodes.size == 1 && cluster_nodes.first['fqdn'] == node['fqdn'])
 if is_first_node
-  node.default['mariadb']['galera']['gcomm_address'] = 'gcomm://'
+  gcomm_address = 'gcomm://'
 else
   # otherwise set the correct cluster address with all cluster nodes
   family = node['openstack']['endpoints']['family']
@@ -50,11 +46,22 @@ else
     cluster_nodes_addresses << address
   end
   cluster_address = cluster_nodes_addresses.join(',')
-  node.default['mariadb']['galera']['gcomm_address'] = "gcomm://#{cluster_address}"
+  gcomm_address = "gcomm://#{cluster_address}"
 end
 
-include_recipe 'openstack-ops-database::mariadb-client'
-include_recipe 'mariadb::galera'
+include_recipe 'openstack-ops-database::mariadb-server'
+
+provider_options = { 'gcache.size': '512M',
+                     'gmcast.listen_addr': gmcast_listen_addr }
+
+mariadb_galera_configuration 'MariaDB Galera Configuration' do
+  version node['openstack']['mariadb']['version']
+  cluster_name 'openstack'
+  gcomm_address gcomm_address
+  wsrep_node_address_interface bind_db['interface']
+  wsrep_provider_options provider_options
+  wsrep_sst_method 'rsync'
+end
 
 # Install clustercheck tool
 cookbook_file '/usr/bin/clustercheck' do
