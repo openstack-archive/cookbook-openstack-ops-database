@@ -6,7 +6,8 @@ solver :ruby, :required
   if Dir.exist?("../cookbook-openstack-#{cookbook}")
     cookbook "openstack-#{cookbook}", path: "../cookbook-openstack-#{cookbook}"
   else
-    cookbook "openstack-#{cookbook}", git: "https://opendev.org/openstack/cookbook-openstack-#{cookbook}"
+    cookbook "openstack-#{cookbook}", git: "https://opendev.org/openstack/cookbook-openstack-#{cookbook}",
+      branch: 'stable/stein'
   end
 end
 
