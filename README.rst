@@ -15,7 +15,7 @@ Requirements
 ============
 
 - Chef 15 or higher
-- Chef Workstation 0.15.18 for testing (also includes Berkshelf for cookbook
+- Chef Workstation 0.18.3 for testing (also includes Berkshelf for cookbook
   dependency resolution)
 
 Platforms
@@ -30,8 +30,8 @@ Cookbooks
 
 The following cookbooks are dependencies:
 
-- 'mariadb', '~> 3.1'
-- 'openstack-common', '~> 19.0.0'
+- 'mariadb', '~> 4.0'
+- 'openstack-common', '~> 20.0.0'
 
 Usage
 =====
