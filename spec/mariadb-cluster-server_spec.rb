@@ -21,7 +21,6 @@ describe 'openstack-ops-database::mariadb-cluster-server' do
         version: '10.3',
         cluster_name: 'openstack',
         gcomm_address: 'gcomm://',
-        wsrep_node_address_interface: 'lo',
         wsrep_provider_options: { 'gcache.size': '512M', 'gmcast.listen_addr': 'tcp://127.0.0.1:4567' },
         wsrep_sst_method: 'rsync'
       )
