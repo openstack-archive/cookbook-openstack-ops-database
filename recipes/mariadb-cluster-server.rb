@@ -58,7 +58,6 @@ mariadb_galera_configuration 'MariaDB Galera Configuration' do
   version node['openstack']['mariadb']['version']
   cluster_name 'openstack'
   gcomm_address gcomm_address
-  wsrep_node_address_interface bind_db['interface']
   wsrep_provider_options provider_options
   wsrep_sst_method 'rsync'
 end
