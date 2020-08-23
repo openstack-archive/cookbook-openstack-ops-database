@@ -33,7 +33,7 @@ node['openstack']['common']['services'].each do |service, project|
       user username
       pass password
     end
-  rescue Net::HTTPServerException, ChefVault::Exceptions::KeysNotFound
-    log "No databag item containing the database password for #{project} was found, so no database was created"
+  rescue Net::HTTPClientException, ChefVault::Exceptions::KeysNotFound
+    Chef::Log.warn("No databag item containing the database password for #{project} was found, so no database was created")
   end
 end
