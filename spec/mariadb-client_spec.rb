@@ -15,10 +15,6 @@ describe 'openstack-ops-database::mariadb-client' do
     end
 
     it do
-      expect(chef_run).to add_mariadb_repository('default').with(version: '10.3')
-    end
-
-    it do
       expect(chef_run).to install_mariadb_client_install('default').with(version: '10.3')
     end
 

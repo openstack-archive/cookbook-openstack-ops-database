@@ -20,6 +20,8 @@
 
 # MariaDB version
 default['openstack']['mariadb']['version'] = '10.3'
+# Whether to set up mariadb repo
+default['openstack']['mariadb']['setup_repo'] = true
 # Storage engine, base OpenStack requires the InnoDB flavor
 default['openstack']['mysql']['default-storage-engine'] = 'InnoDB'
 # InnoDB lock mode for generating auto-increment values
