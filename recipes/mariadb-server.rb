@@ -59,8 +59,9 @@ mariadb_server_configuration 'default' do
     innodb_flush_log_at_trx_commit: node['openstack']['mysql']['innodb_flush_log_at_trx_commit']
   )
   mysqld_bind_address listen_address
-  # increase the default from 5 seconds to allow extra time for services to warm up
-  mysqld_connect_timeout 30
+  mysqld_connect_timeout node['openstack']['mysql']['connect_timeout']
+  mysqld_wait_timeout node['openstack']['mysql']['wait_timeout']
+  mysqld_tmpdir node['openstack']['mysql']['tmpdir']
   mysqld_default_storage_engine node['openstack']['mysql']['default-storage-engine']
   mysqld_max_connections node['openstack']['mysql']['max_connections']
   mysqld_query_cache_size node['openstack']['mysql']['query_cache_size']

@@ -39,6 +39,8 @@ describe 'openstack-ops-database::mariadb-server' do
         },
         mysqld_bind_address: '127.0.0.1',
         mysqld_connect_timeout: 30,
+        mysqld_wait_timeout: 600,
+        mysqld_tmpdir: '/var/tmp',
         mysqld_default_storage_engine: 'InnoDB',
         mysqld_max_connections: 307,
         mysqld_query_cache_size: '0',

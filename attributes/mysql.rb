@@ -50,3 +50,9 @@ default['openstack']['mysql']['character-set-server'] = 'latin1'
 default['openstack']['mysql']['query_cache_size'] = '0'
 # Maximum number of connections
 default['openstack']['mysql']['max_connections'] = 307
+# Increased connect timeout to give services time to warm up
+default['openstack']['mysql']['connect_timeout'] = 30
+# Default wait timeout
+default['openstack']['mysql']['wait_timeout'] = 600
+# Default temp directory
+default['openstack']['mysql']['tmpdir'] = '/var/tmp'
