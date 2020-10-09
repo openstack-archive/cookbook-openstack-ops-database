@@ -27,6 +27,10 @@ describe 'openstack-ops-database::mariadb-cluster-server' do
     end
 
     it do
+      expect(chef_run.mariadb_galera_configuration('MariaDB Galera Configuration')).to notify('service[mysql]').to(:restart).immediately
+    end
+
+    it do
       expect(chef_run).to create_if_missing_cookbook_file('/usr/bin/clustercheck').with(
         source: 'clustercheck',
         owner: 'root',
