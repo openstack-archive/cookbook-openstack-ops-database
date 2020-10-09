@@ -60,6 +60,7 @@ mariadb_galera_configuration 'MariaDB Galera Configuration' do
   gcomm_address gcomm_address
   wsrep_provider_options provider_options
   wsrep_sst_method 'rsync'
+  notifies :restart, 'service[mysql]', :immediately
 end
 
 # Install clustercheck tool
