@@ -41,7 +41,12 @@ else
   family = node['openstack']['endpoints']['family']
   cluster_nodes_addresses = []
   cluster_nodes.each do |cluster_node|
-    address = address_for bind_db['interface'], family, cluster_node
+    bind_db_cluster_node = cluster_node['openstack']['bind_service']['db']
+    if bind_db_cluster_node['interface'].nil?
+      Chef::Log.fatal('Need to specify interface to bind to.')
+      raise
+    end
+    address = address_for bind_db_cluster_node['interface'], family, cluster_node
     cluster_nodes_addresses << address
   end
   cluster_address = cluster_nodes_addresses.join(',')
