@@ -3,7 +3,7 @@ maintainer       'openstack-chef'
 maintainer_email 'openstack-discuss@lists.openstack.org'
 license          'Apache-2.0'
 description      'Provides the shared database configuration for OpenStack'
-version          '19.3.1'
+version          '19.3.2'
 
 %w(ubuntu redhat centos).each do |os|
   supports os
