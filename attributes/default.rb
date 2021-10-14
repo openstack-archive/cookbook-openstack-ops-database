@@ -2,7 +2,7 @@
 # Cookbook:: openstack-ops-database
 # Recipe:: default
 #
-# Copyright:: 2013, AT&T Services, Inc.
+# Copyright:: 2013-2021, AT&T Services, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.

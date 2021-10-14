@@ -14,8 +14,8 @@ supports MariaDB.
 Requirements
 ============
 
-- Chef 15 or higher
-- Chef Workstation 21.2.303 for testing (also includes Berkshelf for cookbook
+- Chef 16 or higher
+- Chef Workstation 21.10.640 for testing (also includes Berkshelf for cookbook
   dependency resolution)
 
 Platforms
@@ -30,7 +30,7 @@ Cookbooks
 
 The following cookbooks are dependencies:
 
-- 'mariadb', '~> 4.0'
+- 'mariadb', '~> 5.0'
 - 'openstack-common', '~> 20.0.0'
 
 Usage
@@ -186,7 +186,7 @@ License and Author
 +-----------------+---------------------------------------------------+
 | **Copyright**   | Copyright (c) 2014-2015, IBM, Corp.               |
 +-----------------+---------------------------------------------------+
-| **Copyright**   | Copyright (c) 2019-2020, Oregon State University  |
+| **Copyright**   | Copyright (c) 2019-2021, Oregon State University  |
 +-----------------+---------------------------------------------------+
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may
